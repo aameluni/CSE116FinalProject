@@ -1,5 +1,7 @@
 package code;
 
+import java.util.ArrayList;
+
 public class Tile {
 	
 	private boolean north;
@@ -7,10 +9,13 @@ public class Tile {
 	private boolean east;
 	private boolean west;
 	private int token;
+	private static ArrayList<Integer> tokens=new ArrayList<Integer>();
 	private int path;
 	private int random;
 
 	public Tile (){
+		if(!tokens.isEmpty())
+		token=tokens.remove((int)(Math.random()*tokens.size()));
 		path =(int)(Math.random()*3);
 		if (path==0){
 			random =(int)(Math.random()*4);
@@ -126,10 +131,22 @@ public class Tile {
 		return east;
 	}
 	
-//	public String toString(){
-//		String s = "North " + north + " South " + south + " East " + east +" West " + west;
-//		return s;
-//	}
+	public void createToken(){
+		for (int i=1; i<21; i++){
+			tokens.add(i);
+		}
+		tokens.add(25);
+	}
+	public int getToken()
+	{
+		return token;
+	}
+	
+	
+	public boolean hasToken(){
+		return token!=0;
+	}
+
 	
 	
 

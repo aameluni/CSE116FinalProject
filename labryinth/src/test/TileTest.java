@@ -2,8 +2,11 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
+import code.Board;
 import code.Tile;
 
 public class TileTest {
@@ -188,5 +191,48 @@ public class TileTest {
 	boolean actual=!tile.getSouth()&&tile.getEast() && !tile.getNorth() && tile.getWest();
 	assertTrue(expected==actual);
 	}
+	
+	@Test
+	public void test21(){
+		Board b = new Board();
+		Tile tile =new Tile();
+		boolean expected=true;
+		boolean actual=tile.getToken()>=1&&tile.getToken()<=20||tile.getToken()==25;
+		assertTrue(expected==actual);
+}
+	
+	@Test
+	public void test22(){
+		ArrayList<Tile> t = new ArrayList<Tile>();
+		for(int i=0 ; i<22; i++){
+		Tile tile =new Tile();
+		t.add(tile);
+		}
+		boolean expected=true;
+		boolean actual=t.get(21).getToken()==0;
+		assertTrue(expected==actual);
+}
+	
+	@Test
+	public void test23(){
+		Tile tile=new Tile();
+		boolean expected=false;
+		boolean actual=tile.hasToken();
+		assertTrue(expected==actual);
+	}
+	
+	@Test
+	public void test24(){
+		Board b=new Board();
+		Tile tile=new Tile();
+		boolean expected=true;
+		boolean actual=tile.hasToken();
+		assertTrue(expected==actual);
+	}
+	
 
+	
+	
+	
+	
 }
