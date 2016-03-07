@@ -12,7 +12,8 @@ public class Tile {
 	private static ArrayList<Integer> tokens=new ArrayList<Integer>();
 	private int path;
 	private int random;
-
+	private int x=0;
+	private int y=0;
 	public Tile (){
 		if(!tokens.isEmpty())
 		token=tokens.remove((int)(Math.random()*tokens.size()));
@@ -50,6 +51,14 @@ public class Tile {
 	public void setRandom(int i)
 	{
 		random = i;
+	}
+	public void setX(int i)
+	{
+		x=i;
+	}
+	public void setY(int i)
+	{
+		y=i;
 	}
 	
 	public boolean createLpath(int random){
@@ -130,7 +139,13 @@ public class Tile {
 	}public boolean getEast(){
 		return east;
 	}
-	
+	public int getX()
+	{
+		return x;
+	}
+	public int getY(){
+		return y;
+	}
 	public void createToken(){
 		for (int i=1; i<21; i++){
 			tokens.add(i);
