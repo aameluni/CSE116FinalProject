@@ -15,8 +15,6 @@ public class Tile {
 	private int x=0;
 	private int y=0;
 	public Tile (){
-		if(!tokens.isEmpty())
-		token=tokens.remove((int)(Math.random()*tokens.size()));
 		path =(int)(Math.random()*3);
 		if (path==0){
 			random =(int)(Math.random()*4);
@@ -157,7 +155,11 @@ public class Tile {
 		return token;
 	}
 	
-	
+	public void setToken()
+	{
+		if(!tokens.isEmpty())
+			token=tokens.remove((int)(Math.random()*tokens.size()));
+	}
 	public boolean hasToken(){
 		return token!=0;
 	}
