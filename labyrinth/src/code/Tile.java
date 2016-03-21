@@ -168,7 +168,7 @@ public class Tile {
 		token=t;
 	}
 
-	public Player hasPlayer(ArrayList <Player> p)
+	public Player getPlayer(ArrayList <Player> p)
 	{
 		for(int i=0;i<p.size();i++)
 		{
@@ -176,6 +176,15 @@ public class Tile {
 				return p.get(i);
 		}
 		return null;
+	}
+	public boolean hasPlayer(ArrayList <Player> p)
+	{
+		for(int i=0;i<p.size();i++)
+		{
+			if(p.get(i).getX()==x && p.get(i).getY()==y)
+				return true;
+		}
+		return false;
 	}
 }
 	

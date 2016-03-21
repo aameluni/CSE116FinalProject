@@ -14,20 +14,24 @@ public class Board {
 }
 
 public void populateBoard(){
+	int count = 0;
 	for (int x=0; x<7; x++){
 		board.add(new ArrayList<Tile>());
 		for (int y=0;y<7;y++){
 			Tile tile =new Tile ();
+			tile.setX(x);
+			tile.setY(y);
 			if( ( (x>0 && x<6) && (y>0 && y<6) ) && (!checker(x,y)) ){
 				tile.setToken();
-				tile.setX(x);
-				tile.setY(y);
 			}
+			board.get(x).add(tile);
 			if (checker(x,y)){
 				player.add(new Player(board,x,y));
+//				System.out.println("" + player.get(count).getX() + ", "+ player.get(count).getY());
+				count++;
 			}	
-		board.get(x).add(tile);
-		System.out.println(tile.getToken());
+//		System.out.println(tile.getToken());
+		
 		}
 	}
 }
@@ -51,12 +55,12 @@ return false;
 
 
 
-private boolean tileShifting(int x, int y){
-	if(x%2==1){
+public boolean tileShifting(int x, int y){
+	if(x%2==1 && x>=0 && x<7){
 		shiftColumn(x,y);
 		return true;
 	}
-	if(y%2==1){
+	if(y%2==1 && y>=0 && y<7){
 		shiftRow(x,y);	
 		return true;
 	}
@@ -68,13 +72,13 @@ private boolean tileShifting(int x, int y){
 private void shiftColumn(int x, int y){
 	if(y==-1)
 	{	
-		swap(board.get(x).get(y+1),eTiles.get(0));
+		swap(board.get(x).get(6),eTiles.get(0));
 		eTiles.add(board.get(x).remove(board.get(x).size()-1));
 		board.get(x).add(0,eTiles.get(0));
 	}
 	if(y==7)
 	{	
-		swap(board.get(x).get(y-1),eTiles.get(0));
+		swap(board.get(x).get(0),eTiles.get(0));
 		eTiles.add(board.get(x).remove(0));
 		board.get(x).add(eTiles.get(0));
 	}	
@@ -82,38 +86,43 @@ private void shiftColumn(int x, int y){
 
 private void shiftRow(int x, int y){
 	if(x==-1)
-	{	
-		swap(board.get(0).get(y),eTiles.get(0));
+	{			
 		for(int i=0;i<board.size();i++)
 		{
+			//swap(board.get(i).get(y),eTiles.get(0));
 			eTiles.add(board.get(i).remove(y));
-			board.get(i).add(y,eTiles.get(0));
+			board.get(i).add(y,eTiles.remove(0));
 		}
-//		eTiles.add(board.get(y).remove(board.get(y).size()-1));
-//		board.get(y).add(0,eTiles.get(0));
+		swap(eTiles.get(0),board.get(0).get(y));
 	}
 	if(x==7)
 	{	
-		swap(board.get(x-1).get(y),eTiles.get(0));
 		for(int i=board.size()-1;i>=0;i--)
 		{
 			eTiles.add(board.get(i).remove(y));
 			board.get(i).add(y,eTiles.get(0));
 		}
-//		eTiles.add(board.get(y).remove(0));
-//		board.get(y).add(eTiles.get(0));
+		swap(eTiles.get(6),board.get(0).get(y));
 	}	
 }
 
 private void swap (Tile tile, Tile tile2){
-	while(tile.hasPlayer(player) != null)
+	while(tile.getPlayer(player) != null)
 	{
-		tile.hasPlayer(player).setTile(tile2);
+		tile.getPlayer(player).setTile(tile2);
 	}
 	if(tile.hasToken())
 	{
 		tile2.setValueOfToken(tile.getToken());
 	}
 }
+	public ArrayList<ArrayList<Tile>> getBoard()
+	{
+		return board;
+	}
+	public ArrayList<Player> getPlayerList()
+	{
+		return player;
+	}
 }
 
