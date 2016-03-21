@@ -110,4 +110,7 @@ public class Player {
 		// TODO Auto-generated method stub
 		return pTile;
 	}
+	public void setTile(Tile t) {
+		pTile = t;
+	}
 }

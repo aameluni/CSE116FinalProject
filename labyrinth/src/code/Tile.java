@@ -163,9 +163,21 @@ public class Tile {
 	public boolean hasToken(){
 		return token!=0;
 	}
-	
-}
+	public void setValueOfToken(int t)
+	{
+		token=t;
+	}
 
+	public Player hasPlayer(ArrayList <Player> p)
+	{
+		for(int i=0;i<p.size();i++)
+		{
+			if(p.get(i).getX()==x && p.get(i).getY()==y)
+				return p.get(i);
+		}
+		return null;
+	}
+}
 	
 //h
 
