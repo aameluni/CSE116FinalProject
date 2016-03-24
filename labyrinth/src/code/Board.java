@@ -1,18 +1,45 @@
 package code;
 
 import java.util.ArrayList;
-
+/**
+ * The Board Class represents the 7 by 7 game board and supervises board movements made by the players
+ * and creates and contains all the basis of the board while moderating the player movements and coordinates
+ * on the board.
+ * 
+ * 
+ * @author Ziyi
+ * @author Brandon
+ * @author Ryan
+ */
 public class Board {
+	/**
+	 * array list of array list that represents our rows and columns  
+	 */
 	private ArrayList <ArrayList<Tile>> board = new ArrayList <ArrayList<Tile>> ();
+	/**
+	 * array list that contains the players that are on the board
+	 */
 	private ArrayList <Player> player = new ArrayList <Player> ();
+	/**
+	 * array list of tiles that are not currently on the board
+	 */
 	private ArrayList<Tile> eTiles = new ArrayList<Tile>();
+	/**
+	 * constructor creates the extra tile in order to create the 21 tokens
+	 * and then populate the board of tiles
+	 */
 	public Board(){
 	Tile t=new Tile();
 	t.createToken();
 	populateBoard();
 	eTiles.add(t);
 }
-
+/**
+ * creates a 7 by 7 board of tiles
+ * adds tokens to the tiles that are on the inner portion of the board other than the players starting tiles
+ * 
+ */
+	
 public void populateBoard(){
 	for (int x=0; x<7; x++){
 		board.add(new ArrayList<Tile>());
@@ -30,7 +57,13 @@ public void populateBoard(){
 		}
 	}
 }
-
+/**
+ * returns true if the x and y coordinates match the starting positions of the players
+ * 
+ * @param x the column number going from left to right
+ * @param y the row number going up and down
+ * @return false if the x and y don't match the players coordinates
+ */
 private boolean checker (int x, int y){
 if (x==2&&y==2)	{
 	return true;
@@ -49,7 +82,12 @@ return false;
 }
 
 
-
+/**
+ * checks to see if the requested tile movement is on an odd column or row on the board
+ * @param x the column number going from left to right
+ * @param y the row number going up and down
+ * @return false on any even positions
+ */
 public boolean tileShifting(int x, int y){
 	if(x%2==1 && x>=0 && x<7){
 		shiftColumn(x,y);
@@ -63,7 +101,12 @@ public boolean tileShifting(int x, int y){
 	
 	return false;
 }
-
+/**
+ * shifts the tiles by adding the extra tile and taking out one the the end tiles in a column
+ * swap, swaps the data between the remove tile and the newly added extra tile
+ * @param x represents which column is being shifted
+ * @param y represents the direction
+ */
 private void shiftColumn(int x, int y){
 	if(y==-1)
 	{	
@@ -78,7 +121,12 @@ private void shiftColumn(int x, int y){
 		board.get(x).add(eTiles.remove(0));
 	}	
 }
-
+/**
+ * similar to the shiftColumn however we had to use for loops because each row represents a different
+ *array list so its necessary to go one by one to each array list at a specific position  
+ * @param x represents which row is being shifted
+ * @param y represents the direction
+ */
 private void shiftRow(int x, int y){
 	if(x==-1)
 	{			
@@ -99,7 +147,11 @@ private void shiftRow(int x, int y){
 		swap(eTiles.get(0),board.get(6).get(y));
 	}	
 }
-
+/**
+ * switches the token and player data between two tiles
+ * @param tile with the data you want to switch
+ * @param tile2 the tile with empty data
+ */
 private void swap (Tile tile, Tile tile2){
 	while(tile.getPlayer(player) != null)
 	{
@@ -110,6 +162,7 @@ private void swap (Tile tile, Tile tile2){
 		tile2.setValueOfToken(tile.getToken());
 	}
 }
+
 	public ArrayList<ArrayList<Tile>> getBoard()
 	{
 		return board;
