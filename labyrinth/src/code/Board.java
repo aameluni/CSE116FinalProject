@@ -7,9 +7,8 @@ import java.util.ArrayList;
  * on the board.
  * 
  * 
- * @author Ziyi
- * @author Brandon
- * @author Ryan
+ * @author Ziyi Liu
+ * @author Ryan Wong
  */
 public class Board {
 	/**

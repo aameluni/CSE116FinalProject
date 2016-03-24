@@ -6,20 +6,10 @@ import java.util.ArrayList;
 
 /**
 
- * The player method 
-
- * <p>
-
  * The player class is containing all the elements that players have
-
  * and connected to Tile class
 
- * 
-
  * @author  Ryan Wong
-
- * @author  Ziyi Liu
-
  * @author  Yicheng Teng
 
  *  
@@ -35,15 +25,15 @@ public class Player {
 	private Tile pTile;
 	/**
 
-	 * Player method, this method call another method, assign value to 
+	 * Player constructor calls another method, assigns value to 
 
-	 * two variables, and sent these value to a new class, this method
+	 * two variables, and sends these value to a new class, this constructor
 
-	 * has an array list and two integer variable
+	 * takes in an array list and two integer variables
 
 	 * <p>
 
-	 * This method was created for showing the original situation
+	 * This constructor was created for showing the original situation
 
 	 * and position of the pawn/players while the game has started  
 
