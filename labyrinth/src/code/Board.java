@@ -1,6 +1,8 @@
 package code;
 
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
 /**
  * The Board Class represents the 7 by 7 game board and supervises board movements made by the players
  * and creates and contains all the basis of the board while moderating the player movements and coordinates
@@ -169,6 +171,10 @@ private void swap (Tile tile, Tile tile2){
 	public ArrayList<Player> getPlayerList()
 	{
 		return player;
+	}
+	public void setObserver(UI ui) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

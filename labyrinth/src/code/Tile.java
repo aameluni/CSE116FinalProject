@@ -2,6 +2,8 @@ package code;
 
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+
 /**
  * This tile class was created with several methods to create the individual/specific tiles 
  * which will populate the game board needed to play the Master Labyrinth game. Each specific
@@ -61,6 +63,8 @@ public class Tile {
 			random =(int)(Math.random()*2);
 			createSpath(random);
 		}
+		JButton b = new JButton();
+		
 	}
 	/**
 	 * All four boolean values representing the four directions are set to false as default
@@ -280,6 +284,26 @@ public class Tile {
 				return true;
 		}
 		return false;
+	}
+	public String toString()
+	{
+		String s ="";
+		if(north)
+			s+="North \n";
+		if(south)
+			s+="South \n";
+		if(east)
+			s+="East \n";
+		if(west)
+			s+="West \n";
+		if(hasToken())
+		s+="" +token;
+		return s;
+	}
+	public static void main(String args[])
+	{
+		Tile  t = new Tile();
+		System.out.println(t.toString());
 	}
 }
 	
