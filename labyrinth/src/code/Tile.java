@@ -63,7 +63,6 @@ public class Tile {
 			random =(int)(Math.random()*2);
 			createSpath(random);
 		}
-		JButton b = new JButton();
 		
 	}
 	/**
@@ -76,6 +75,22 @@ public class Tile {
 	public void setPath(int i)
 	{
 		path = i;
+		north =false;
+		south =false;
+		west =false;
+		east =false;
+		if (path==0){
+			createLpath(random);
+		}
+		if (path==1){
+			createTpath(random);
+		}
+		if (path==2){
+			createSpath(random);
+		}
+	}
+	public void setPath()
+	{
 		north =false;
 		south =false;
 		west =false;
@@ -178,12 +193,12 @@ public class Tile {
 	 * @return Simply returns true if an appropriate path is created successfully.
 	 */
 	public boolean createSpath(int random){
-		if (random==0){
+		if (random==0 || random==2){
 			north=true;
 			south=true;	
 			return true;
 		}
-		if (random==1){
+		if (random==1 || random==3){
 			west=true;
 			east=true;
 			return true;
@@ -300,10 +315,9 @@ public class Tile {
 		s+="" +token;
 		return s;
 	}
-	public static void main(String args[])
+	public int getRandom()
 	{
-		Tile  t = new Tile();
-		System.out.println(t.toString());
+		return random;
 	}
 }
 	

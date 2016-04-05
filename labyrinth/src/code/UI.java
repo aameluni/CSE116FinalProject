@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class UI{
@@ -22,7 +23,8 @@ public class UI{
 	private Board _board;
 
 	public UI (Board board){
-		_board=board;		
+		_board=board;	
+		_board.setObserver(this);
 		_window = new JFrame("Master Labyrinth");
 		_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_window.setFocusable(true);
@@ -39,6 +41,7 @@ public class UI{
 				b.setFont(font);
 				b.setLayout(new BoxLayout(b,3));
 				_boardPanel.add(b);
+				
 				if ((x>0&&x<8) && (y>0&&y<8)){
 					JButton b1= new JButton ();
 					b.add(b1);
@@ -46,6 +49,29 @@ public class UI{
 				}
 				else if(x%2!=0 || y%2!=0 || ((x==0||x==8) && (y==0 || y ==8))){
 					b.setVisible(false);
+				}
+				else
+				{
+					if(x==0)
+					{
+						System.out.println( ""+x + ","+ y);
+						b.addActionListener(new ButtonListener(_board,y-1,-1));
+					}
+					if(x==8)
+					{
+						System.out.println( ""+x + ","+ y);
+						b.addActionListener(new ButtonListener(_board,y-1,7));
+					}
+					if(y==0)
+					{
+						System.out.println( ""+x + ","+ y);
+						b.addActionListener(new ButtonListener(_board,-1,x-1));
+					}
+					if(y==8)
+					{
+						System.out.println( ""+x + ","+ y);
+						b.addActionListener(new ButtonListener(_board,7,x-1));
+					}
 				}
 				
 			}
@@ -55,8 +81,18 @@ public class UI{
 		_boardPanel2 = new JPanel();
 		_boardPanel2.setBorder(BorderFactory.createLineBorder(Color.black));
 		JButton extra = new JButton();
+		Font font = new Font("SansSerif", Font.PLAIN, 9);
+		extra.setFont(font);
 		extra.setPreferredSize(new Dimension(125, 75));
+		extra.addActionListener(new ButtonListener2(board));
+		JLabel l=new JLabel();
+		l.setText("Click tile in order to rotate");
+		JLabel l1=new JLabel();
+		l1.setText("EXTRA TILE");
+		_boardPanel2.add(l1);
 		_boardPanel2.add(extra);
+		_boardPanel2.add(l);
+		_boardPanel2.setLayout(new GridLayout(3,1));
 		_window.add(_boardPanel2);
 		_window.pack();
 		_window.setVisible(true);
@@ -81,7 +117,6 @@ public class UI{
 				{
 					JButton b =(JButton) _boardPanel.getComponent(counter);
 					String s = _board.getBoard().get(i).get(j).toString();
-					System.out.println(s);
 					b.setText(s);
 					counter+=9;
 					if(x==i && y==j)
@@ -92,7 +127,9 @@ public class UI{
 			}	
 			
 		}
-		_window.repaint();
+		JButton b1  = (JButton) _boardPanel2.getComponent(1);
+		b1.setText(_board.getExtra().toString());
+		//_window.repaint();
 	}
 	
 	public static void main (String [] args){

@@ -29,6 +29,8 @@ public class Board {
 	 * constructor creates the extra tile in order to create the 21 tokens
 	 * and then populate the board of tiles
 	 */
+	private UI u;
+	private int currentToken=1;
 	public Board(){
 	Tile t=new Tile();
 	t.createToken();
@@ -92,14 +94,16 @@ return false;
 public boolean tileShifting(int x, int y){
 	if(x%2==1 && x>=0 && x<7){
 		shiftColumn(x,y);
+		changeState();
 		return true;
 	}
 	if(y%2==1 && y>=0 && y<7){
-		shiftRow(x,y);	
+		shiftRow(x,y);
+		changeState();
 		return true;
 	}
 	
-	
+	System.out.println("im not working");
 	return false;
 }
 /**
@@ -160,8 +164,9 @@ private void swap (Tile tile, Tile tile2){
 	}
 	if(tile.hasToken())
 	{
-		tile2.setValueOfToken(tile.getToken());
+		tile2.setValueOfToken(tile.getToken());	
 	}
+	tile.setValueOfToken(0);
 }
 
 	public ArrayList<ArrayList<Tile>> getBoard()
@@ -173,8 +178,25 @@ private void swap (Tile tile, Tile tile2){
 		return player;
 	}
 	public void setObserver(UI ui) {
-		// TODO Auto-generated method stub
-		
+		u=ui;
+	}
+	public void changeState(){
+		if(u!=null)
+			u.update();
+	}
+	public Tile getExtra()
+	{
+		return eTiles.get(0);
+	}
+	public void playerPickup(Player p)
+	{
+		if(p.getPtile().hasToken() && p.getPtile().getToken()==currentToken)
+		{
+			p.addToken(currentToken);
+			p.getPtile().setValueOfToken(0);
+			currentToken++;
+		}
+			
 	}
 }
 
