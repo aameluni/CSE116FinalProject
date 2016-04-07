@@ -40,11 +40,13 @@ public class UI{
 				Font font = new Font("SansSerif", Font.PLAIN, 9);
 				b.setFont(font);
 				b.setLayout(new BoxLayout(b,3));
+				
 				_boardPanel.add(b);
 				
 				if ((x>0&&x<8) && (y>0&&y<8)){
 					JButton b1= new JButton ();
 					b.add(b1);
+					b.addActionListener(new ButtonListener3(_board,y-1,x-1));
 					b1.setVisible(false);
 				}
 				else if(x%2!=0 || y%2!=0 || ((x==0||x==8) && (y==0 || y ==8))){
@@ -54,22 +56,22 @@ public class UI{
 				{
 					if(x==0)
 					{
-						System.out.println( ""+x + ","+ y);
+						
 						b.addActionListener(new ButtonListener(_board,y-1,-1));
 					}
 					if(x==8)
 					{
-						System.out.println( ""+x + ","+ y);
+						
 						b.addActionListener(new ButtonListener(_board,y-1,7));
 					}
 					if(y==0)
 					{
-						System.out.println( ""+x + ","+ y);
+						
 						b.addActionListener(new ButtonListener(_board,-1,x-1));
 					}
 					if(y==8)
 					{
-						System.out.println( ""+x + ","+ y);
+						
 						b.addActionListener(new ButtonListener(_board,7,x-1));
 					}
 				}
@@ -104,12 +106,13 @@ public class UI{
 	
 	public void update()
 	{
-		
+//		clearB1();
 		for(int k=0; k<_board.getPlayerList().size();k++)
 		{
 			int x =_board.getPlayerList().get(k).getX();
 			int y =_board.getPlayerList().get(k).getY();
 			int ss =0;
+			
 			for(int i=0;i<7;i++)
 			{
 				int counter =10+ss;
@@ -119,8 +122,12 @@ public class UI{
 					String s = _board.getBoard().get(i).get(j).toString();
 					b.setText(s);
 					counter+=9;
+					JButton b1 = (JButton)b.getComponent(0);
 					if(x==i && y==j)
-						b.getComponent(0).setVisible(true);
+						{
+						b1.setVisible(true);
+						b1.setText(_board.getPlayers(_board.getBoard().get(i).get(j)));
+						}
 				}
 				counter+=2;
 				ss++;
@@ -131,8 +138,25 @@ public class UI{
 		b1.setText(_board.getExtra().toString());
 		//_window.repaint();
 	}
-	
-	public static void main (String [] args){
-		UI ui = new UI (new Board());
-		}
+//	public void clearB1()
+//	{
+//		
+//		for(int i=0;i<7;i++)
+//		{
+//			int count=10;
+//			for(int j=0;j<6;j++)
+//			{
+//				count+=9;
+//				System.out.println("a");
+//				JButton b = (JButton)_boardPanel.getComponent(count);
+//				JButton b1 = (JButton)b.getComponent(0);
+//				b1.setVisible(false);
+//				b1.setText("");
+//			}
+//			count-=54;
+//			count++;
+//			System.out.println(count);
+//		}
+//	}
+
 }

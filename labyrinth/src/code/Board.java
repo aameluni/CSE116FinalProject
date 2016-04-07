@@ -30,12 +30,26 @@ public class Board {
 	 * and then populate the board of tiles
 	 */
 	private UI u;
+	private int playerCount=0;
+	private int max;
 	private int currentToken=1;
-	public Board(){
+	private String[] names;
+	private Player currentPlayer;
+	private int cpindex;
+	public Board(String[] p){
 	Tile t=new Tile();
 	t.createToken();
+	names = p;
+	max = names.length;
+	playerCount = p.length;
+	if(playerCount<2 || playerCount>4)
+		throw new IndexOutOfBoundsException();
 	populateBoard();
+	currentPlayer = player.get(cpindex);
+	currentPlayer.toggleTurn();
 	eTiles.add(t);
+	System.out.println(getPlayers(board.get(2).get(2)));
+	
 }
 /**
  * creates a 7 by 7 board of tiles
@@ -44,6 +58,7 @@ public class Board {
  */
 	
 public void populateBoard(){
+	
 	for (int x=0; x<7; x++){
 		board.add(new ArrayList<Tile>());
 		for (int y=0;y<7;y++){
@@ -54,8 +69,9 @@ public void populateBoard(){
 				tile.setToken();
 			}
 			board.get(x).add(tile);
-			if (checker(x,y)){
-				player.add(new Player(board,x,y));
+			if (checker(x,y) && playerCount>0){
+				player.add(new Player(board,x,y,names[max-playerCount]));
+				playerCount--;
 			}	
 		}
 	}
@@ -197,6 +213,34 @@ private void swap (Tile tile, Tile tile2){
 			currentToken++;
 		}
 			
+	}
+	public String getPlayers(Tile t)
+	{
+		String s ="";
+		int count = 0;
+		while(count<max)
+		{
+			if(t.hasPlayer(player) && player.get(count).getPtile()==t)
+		{
+			s += "" + player.get(count).getName();
+		}
+			count++;
+		}
+		return s;
+	}
+	public void rotatePlayerTurn()
+	{
+		player.get(cpindex).toggleTurn();
+		cpindex++;
+		if(cpindex==max)
+			cpindex=0;
+		player.get(cpindex).toggleTurn();
+		currentPlayer = player.get(cpindex);
+		
+	}
+	public Player getCP()
+	{
+		return currentPlayer;
 	}
 }
 

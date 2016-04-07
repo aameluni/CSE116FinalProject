@@ -23,6 +23,7 @@ public class Player {
 	private int _x;
 	private int _y;
 	private Tile pTile;
+	private String name;
 	/**
 
 	 * Player constructor calls another method, assigns value to 
@@ -50,11 +51,12 @@ public class Player {
 	 * @param b    Assign an integer b as the coordinate of the pawn
 
 	 */
-	public Player(ArrayList<ArrayList<Tile>> t, int a, int b){
+	public Player(ArrayList<ArrayList<Tile>> t, int a, int b, String n){
 		createMagicCard();
 		_x=a;
 		_y=b;
 		pTile= playerTile(t,a,b);
+		name= n;
 	}
 	/**
 
@@ -306,5 +308,26 @@ public class Player {
      */
 	public void setTile(Tile t) {
 		pTile = t;
+		_x = t.getX();
+		_y = t.getY();
+	}
+	public void playerMove(Tile t) 
+	{
+		if(legitMove(t))
+			setTile(t);
+		System.out.println("new pTile" + pTile);
+	}
+	public void toggleTurn()
+	{
+		if(_turn == false)
+			_turn = true;
+		else
+		if(_turn ==true)
+			_turn=false;
+		
+	}
+	public String getName()
+	{
+		return name;
 	}
 }
