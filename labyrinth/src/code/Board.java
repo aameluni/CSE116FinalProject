@@ -318,7 +318,8 @@ private void swap (Tile tile, Tile tile2){
 			}
 		}
 		String name = winner.getName();
-		return name + "Wins!";
+		System.out.println(name + " Wins!");
+		return name + " Wins!";
 	}
 	public String checkGameState()
 	{
