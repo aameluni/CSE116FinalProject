@@ -48,7 +48,6 @@ public class Board {
 	currentPlayer = player.get(cpindex);
 	currentPlayer.toggleTurn();
 	eTiles.add(t);
-	System.out.println(getPlayers(board.get(2).get(2)));
 	
 }
 /**
@@ -110,16 +109,16 @@ return false;
 public boolean tileShifting(int x, int y){
 	if(x%2==1 && x>=0 && x<7){
 		shiftColumn(x,y);
+	//	refresh();
 		changeState();
 		return true;
 	}
 	if(y%2==1 && y>=0 && y<7){
 		shiftRow(x,y);
+		refresh();
 		changeState();
 		return true;
 	}
-	
-	System.out.println("im not working");
 	return false;
 }
 /**
@@ -131,15 +130,37 @@ public boolean tileShifting(int x, int y){
 private void shiftColumn(int x, int y){
 	if(y==-1)
 	{	
+//		eTiles.get(0).setX(x);
+//		eTiles.get(0).setY(0);
 		swap(board.get(x).get(6),eTiles.get(0));
 		eTiles.add(board.get(x).remove(board.get(x).size()-1));
 		board.get(x).add(0,eTiles.remove(0));
+		refresh();
+		for(int i=0;i<player.size();i++)
+		{
+			if(player.get(i).getX()==x)
+			{	
+				player.get(i).setY(player.get(i).getY()+1);
+				player.get(i).setTile(board.get(x).get(player.get(i).getY()));
+			}
+		}
 	}
 	if(y==7)
 	{	
+//		eTiles.get(0).setX(x);
+//		eTiles.get(0).setY(6);
 		swap(board.get(x).get(0),eTiles.get(0));
 		eTiles.add(board.get(x).remove(0));
 		board.get(x).add(eTiles.remove(0));
+		refresh();
+		for(int i=0;i<player.size();i++)
+		{
+			if(player.get(i).getX()==x)
+			{
+				player.get(i).setY(player.get(i).getY()-1);
+				player.get(i).setTile(board.get(x).get(player.get(i).getY()));
+			}
+		}
 	}	
 }
 /**
@@ -154,19 +175,43 @@ private void shiftRow(int x, int y){
 		for(int i=0;i<board.size();i++)
 		{
 			eTiles.add(board.get(i).remove(y));
+//			eTiles.get(0).setX(i);
+//			eTiles.get(0).setY(y);
 			board.get(i).add(y,eTiles.remove(0));
 		}
+		refresh();
+		for(int j=0;j<player.size();j++)
+		{
+			if(player.get(j).getY()==y){
+				player.get(j).setX(player.get(j).getX()+1);
+				player.get(j).setTile(board.get(player.get(j).getX()).get(y));
+				}
+		}
 		swap(eTiles.get(0),board.get(0).get(y));
+
 	}
 	if(x==7)
 	{	
 		for(int i=board.size()-1;i>=0;i--)
 		{
 			eTiles.add(board.get(i).remove(y));
+//			eTiles.get(0).setX(i);
+//			eTiles.get(0).setY(y);
 			board.get(i).add(y,eTiles.remove(0));
 		}
+		refresh();
+		for(int i=0;i<player.size();i++)
+		{
+			if(player.get(i).getY()==y)
+				{
+				player.get(i).setX(player.get(i).getX()-1);
+				player.get(i).setTile(board.get(player.get(i).getX()).get(y));
+				
+				}
+		}
 		swap(eTiles.get(0),board.get(6).get(y));
-	}	
+	}
+		
 }
 /**
  * switches the token and player data between two tiles
@@ -174,21 +219,24 @@ private void shiftRow(int x, int y){
  * @param tile2 the tile with empty data
  */
 private void swap (Tile tile, Tile tile2){
-	while(tile.getPlayer(player) != null)
-	{
-		tile.getPlayer(player).setTile(tile2);
-	}
+//	while(tile.getPlayer(player) != null)
+//	{
+//		tile.getPlayer(player).setTile(tile2);
+//		System.out.println(getPlayers(tile2));
+//	}
 	if(tile.hasToken())
 	{
 		tile2.setValueOfToken(tile.getToken());	
+		tile.setValueOfToken(0);
 	}
-	tile.setValueOfToken(0);
+	refresh();
 }
 
 	public ArrayList<ArrayList<Tile>> getBoard()
 	{
 		return board;
 	}
+	
 	public ArrayList<Player> getPlayerList()
 	{
 		return player;
@@ -204,12 +252,12 @@ private void swap (Tile tile, Tile tile2){
 	{
 		return eTiles.get(0);
 	}
-	public void playerPickup(Player p)
+	public void playerPickup()
 	{
-		if(p.getPtile().hasToken() && p.getPtile().getToken()==currentToken)
+		if(currentPlayer.getPtile().hasToken() && currentPlayer.getPtile().getToken()==currentToken)
 		{
-			p.addToken(currentToken);
-			p.getPtile().setValueOfToken(0);
+			currentPlayer.addToken(currentToken);
+			currentPlayer.getPtile().setValueOfToken(0);
 			currentToken++;
 		}
 			
@@ -242,5 +290,18 @@ private void swap (Tile tile, Tile tile2){
 	{
 		return currentPlayer;
 	}
+	public void refresh(){
+		for(int x=0;x<board.size();x++)
+		{
+			for(int y=0;y<board.get(x).size();y++)
+			{
+				board.get(x).get(y).setX(x);
+				board.get(x).get(y).setY(y);
+			}
+		}
+//		eTiles.get(0).setX(7);
+//		eTiles.get(0).setY(7);
+	}
+	
 }
 

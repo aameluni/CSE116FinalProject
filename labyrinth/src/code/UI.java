@@ -46,7 +46,7 @@ public class UI{
 				if ((x>0&&x<8) && (y>0&&y<8)){
 					JButton b1= new JButton ();
 					b.add(b1);
-					b.addActionListener(new ButtonListener3(_board,y-1,x-1));
+					b.addActionListener(new ButtonListener3(this, _board,y-1,x-1));
 					b1.setVisible(false);
 				}
 				else if(x%2!=0 || y%2!=0 || ((x==0||x==8) && (y==0 || y ==8))){
@@ -57,22 +57,22 @@ public class UI{
 					if(x==0)
 					{
 						
-						b.addActionListener(new ButtonListener(_board,y-1,-1));
+						b.addActionListener(new ButtonListener(this,_board,y-1,-1));
 					}
 					if(x==8)
 					{
 						
-						b.addActionListener(new ButtonListener(_board,y-1,7));
+						b.addActionListener(new ButtonListener(this,_board,y-1,7));
 					}
 					if(y==0)
 					{
 						
-						b.addActionListener(new ButtonListener(_board,-1,x-1));
+						b.addActionListener(new ButtonListener(this,_board,-1,x-1));
 					}
 					if(y==8)
 					{
 						
-						b.addActionListener(new ButtonListener(_board,7,x-1));
+						b.addActionListener(new ButtonListener(this,_board,7,x-1));
 					}
 				}
 				
@@ -98,6 +98,7 @@ public class UI{
 		_window.add(_boardPanel2);
 		_window.pack();
 		_window.setVisible(true);
+		enablePlayers(false);
 		update();
 		
 		
@@ -106,7 +107,7 @@ public class UI{
 	
 	public void update()
 	{
-//		clearB1();
+		clearB1();
 		for(int k=0; k<_board.getPlayerList().size();k++)
 		{
 			int x =_board.getPlayerList().get(k).getX();
@@ -129,7 +130,7 @@ public class UI{
 						b1.setText(_board.getPlayers(_board.getBoard().get(i).get(j)));
 						}
 				}
-				counter+=2;
+				counter++;
 				ss++;
 			}	
 			
@@ -138,25 +139,63 @@ public class UI{
 		b1.setText(_board.getExtra().toString());
 		//_window.repaint();
 	}
-//	public void clearB1()
-//	{
-//		
-//		for(int i=0;i<7;i++)
-//		{
-//			int count=10;
-//			for(int j=0;j<6;j++)
-//			{
-//				count+=9;
-//				System.out.println("a");
-//				JButton b = (JButton)_boardPanel.getComponent(count);
-//				JButton b1 = (JButton)b.getComponent(0);
-//				b1.setVisible(false);
-//				b1.setText("");
-//			}
-//			count-=54;
-//			count++;
-//			System.out.println(count);
-//		}
-//	}
-
+	public void clearB1()
+	{
+		int count=10;
+		for(int i=0;i<7;i++)
+		{
+			
+			for(int j=0;j<7;j++)
+			{
+				JButton b = (JButton)_boardPanel.getComponent(count);
+				JButton b1 = (JButton)b.getComponent(0);
+				b1.setVisible(false);
+				b1.setText("");
+				count++;
+			}
+			count+=2;
+		}
+	}
+	public void disableShift(boolean b)
+	{
+		for(int i=0;i<81;i++)
+		{
+			JButton tm;
+			if(i<9||i>72||i%9==0 || (i-8)%9==0)
+			{
+				tm = (JButton) _boardPanel.getComponent(i);
+				if(b)
+				tm.setEnabled(false);
+				else
+					tm.setEnabled(true);
+			}
+			
+		}
+		
+	} 
+	public void enablePlayers(boolean bo)
+	{
+		
+		int count=10;
+		for(int i=0;i<7;i++)
+		{
+			
+			for(int j=0;j<7;j++)
+			{
+				JButton b = (JButton)_boardPanel.getComponent(count);
+				if(bo)
+				b.setEnabled(true);
+				else
+					b.setEnabled(false);
+				count++;
+			}
+			count+=2;
+		}
+	}
+	public void stopper()
+	{
+		_board.rotatePlayerTurn();
+		disableShift(false);
+		enablePlayers(false);
+	}
 }

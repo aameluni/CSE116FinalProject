@@ -8,6 +8,7 @@ public class ButtonListener2 implements ActionListener {
 	private Board b;
 	public ButtonListener2(Board bo)
 	{
+		
 		b=bo;
 	}
 	@Override

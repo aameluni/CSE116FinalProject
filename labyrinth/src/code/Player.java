@@ -311,11 +311,12 @@ public class Player {
 		_x = t.getX();
 		_y = t.getY();
 	}
+	
 	public void playerMove(Tile t) 
 	{
 		if(legitMove(t))
 			setTile(t);
-		System.out.println("new pTile" + pTile);
+		
 	}
 	public void toggleTurn()
 	{
@@ -326,8 +327,27 @@ public class Player {
 			_turn=false;
 		
 	}
+	public void setX(int x)
+	{
+		_x=x;
+		if(_x>6)
+			_x=0;
+		if(_x<0)
+			_x=6;
+		
+	}
+	public void setY(int y)
+	{
+		_y=y;
+		if(_y<0)
+			_y=6;
+		if(_y>6)
+			_y=0;
+	}
+	
 	public String getName()
 	{
 		return name;
 	}
+	
 }
