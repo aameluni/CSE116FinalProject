@@ -259,6 +259,8 @@ private void swap (Tile tile, Tile tile2){
 			currentPlayer.addToken(currentToken);
 			currentPlayer.getPtile().setValueOfToken(0);
 			currentToken++;
+			if(currentToken>20 && currentToken<25)
+				currentToken=25;
 		}
 			
 	}
@@ -284,12 +286,15 @@ private void swap (Tile tile, Tile tile2){
 			cpindex=0;
 		player.get(cpindex).toggleTurn();
 		currentPlayer = player.get(cpindex);
+
+		System.out.println(currentPlayer.getName());
 		
 	}
 	public Player getCP()
 	{
 		return currentPlayer;
 	}
+
 	public void refresh(){
 		for(int x=0;x<board.size();x++)
 		{
@@ -302,6 +307,25 @@ private void swap (Tile tile, Tile tile2){
 //		eTiles.get(0).setX(7);
 //		eTiles.get(0).setY(7);
 	}
-	
+	public String gameEnd()
+	{
+		Player winner = player.get(0);
+		for(int i = 1 ; i <player.size();i++)
+		{
+			if(player.get(i).score()>winner.score())
+			{
+				winner = player.get(i);
+			}
+		}
+		String name = winner.getName();
+		return name + "Wins!";
+	}
+	public String checkGameState()
+	{
+		if(currentToken>25)
+			return gameEnd();
+		else
+			return currentPlayer.getName() + "'s Score:" + currentPlayer.score();
+	}
 }
 

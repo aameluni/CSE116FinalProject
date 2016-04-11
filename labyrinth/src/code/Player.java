@@ -178,12 +178,12 @@ public class Player {
 	public int score(){
 		int score = 0;
 		for(int i=0;i<_token.size();i++){
-			if(_magicCard.contains(_token.get(i))){
+			/*if(_magicCard.contains(_token.get(i))){
 				score = score +20;
-			}
+			}*/
 			score = score +_token.get(i);
 		}
-		score = score + _magicWands*3;
+//		score = score + _magicWands*3 ;
 		return score;
 	}
 	/**

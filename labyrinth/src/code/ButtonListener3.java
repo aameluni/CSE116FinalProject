@@ -13,12 +13,13 @@ public class ButtonListener3 implements ActionListener{
 	public ButtonListener3(UI u, Board bo, int x, int y)
 	{
 		b=bo;
-		p=b.getCP();
+		
 		this.x=x;
 		this.y=y;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		p=b.getCP();
 		// TODO Auto-generated method stub
 		t=b.getBoard().get(x).get(y);
 		if(p.legitMove(t))

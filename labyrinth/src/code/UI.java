@@ -87,6 +87,7 @@ public class UI{
 		extra.setFont(font);
 		extra.setPreferredSize(new Dimension(125, 75));
 		extra.addActionListener(new ButtonListener2(board));
+	
 		JLabel l=new JLabel();
 		l.setText("Click tile in order to rotate");
 		JLabel l1=new JLabel();
@@ -94,7 +95,15 @@ public class UI{
 		_boardPanel2.add(l1);
 		_boardPanel2.add(extra);
 		_boardPanel2.add(l);
-		_boardPanel2.setLayout(new GridLayout(3,1));
+		JButton endturn = new JButton("End Turn");
+		endturn.addActionListener(new ButtonListener4(this));
+		_boardPanel2.add(endturn);
+		JButton tokenpickup = new JButton("Pickup Token");
+		tokenpickup.addActionListener(new ButtonListener5(_board));
+		_boardPanel2.add(tokenpickup);
+		JLabel l2=new JLabel();
+		_boardPanel2.add(l2);
+		_boardPanel2.setLayout(new GridLayout(6,1));
 		_window.add(_boardPanel2);
 		_window.pack();
 		_window.setVisible(true);
@@ -129,6 +138,7 @@ public class UI{
 						b1.setVisible(true);
 						b1.setText(_board.getPlayers(_board.getBoard().get(i).get(j)));
 						}
+					
 				}
 				counter++;
 				ss++;
@@ -137,6 +147,8 @@ public class UI{
 		}
 		JButton b1  = (JButton) _boardPanel2.getComponent(1);
 		b1.setText(_board.getExtra().toString());
+		JLabel l = (JLabel) _boardPanel2.getComponent(5);
+		l.setText(_board.checkGameState());
 		//_window.repaint();
 	}
 	public void clearB1()
