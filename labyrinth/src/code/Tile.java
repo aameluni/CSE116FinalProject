@@ -314,6 +314,20 @@ public class Tile {
 		if(hasToken())
 		s+="" +token;
 		return s;
+//		if(path==0)
+//		{
+//			return "/Users/aamel786/Desktop/LPath.jpg";
+//		}
+//		if(path==1)
+//		{
+//			return "/Users/aamel786/Desktop/TPath.jpg";
+//		}
+//		if(path==2)
+//		{
+//			return "/Users/aamel786/Desktop/Straight.jpg";
+//		}
+//		else return "";
+		
 	}
 	public int getRandom()
 	{

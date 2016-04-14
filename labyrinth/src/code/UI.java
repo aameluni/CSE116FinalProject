@@ -5,11 +5,17 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -85,7 +91,7 @@ public class UI{
 		JButton extra = new JButton();
 		Font font = new Font("SansSerif", Font.PLAIN, 9);
 		extra.setFont(font);
-		extra.setPreferredSize(new Dimension(125, 75));
+		extra.setPreferredSize(new Dimension(120, 75));
 		extra.addActionListener(new ButtonListener2(board));
 	
 		JLabel l=new JLabel();
@@ -130,7 +136,17 @@ public class UI{
 				{
 					JButton b =(JButton) _boardPanel.getComponent(counter);
 					String s = _board.getBoard().get(i).get(j).toString();
+//					Image img = null;
+//					try{
+//					img = ImageIO.read(new File(s));
+//					System.out.println(s);
+//					}
+//					catch(IOException a)
+//					{
+//						System.out.println("Image does not exist");
+//					}
 					b.setText(s);
+//					b.setIcon(new ImageIcon(img));
 					counter+=9;
 					JButton b1 = (JButton)b.getComponent(0);
 					if(x==i && y==j)
