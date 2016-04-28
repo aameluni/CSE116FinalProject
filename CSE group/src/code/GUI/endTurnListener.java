@@ -39,6 +39,8 @@ public class endTurnListener implements ActionListener{
 			}
 			_model.firstMove = true;
 			_model.playerUp = _model.playerUp + 1;
+			if(_model.pawns[2]==null && _model.playerUp>2)_model.playerUp = 1;
+			if(_model.pawns[3]==null && _model.playerUp>3)_model.playerUp = 1;
 			if(_model.playerUp>4)_model.playerUp = 1;
 			_model.gameChanged();
 		}

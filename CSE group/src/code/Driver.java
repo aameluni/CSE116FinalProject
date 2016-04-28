@@ -17,14 +17,27 @@ public class Driver {
 			model.pawns[3] = new Pawn(4,2, model,"player 4");
 			SwingUtilities.invokeLater(new GUI(model));
 			}
-		else {
-			model.pawns[0] = new Pawn(2,2, model,args[0]);
-			model.pawns[1] = new Pawn(4,4, model,args[1]);
-			model.pawns[2] = new Pawn(2,4, model,args[2]);
-			model.pawns[3] = new Pawn(4,2, model,args[3]);
+		else if ( args.length == 2 ){
+			model.pawns[0] = new Pawn(2,2, model,"player 1");
+			model.pawns[1] = new Pawn(4,4, model,"player 2");
 			SwingUtilities.invokeLater(new GUI(model));
-			}
-		
+
+		}
+		else if ( args.length == 3 ){
+			model.pawns[0] = new Pawn(2,2, model,"player 1");
+			model.pawns[1] = new Pawn(4,4, model,"player 2");
+			model.pawns[2] = new Pawn(2,4, model,"player 3");
+			SwingUtilities.invokeLater(new GUI(model));
+
+		}
+		else if ( args.length == 4 ){
+			model.pawns[0] = new Pawn(2,2, model,"player 1");
+			model.pawns[1] = new Pawn(4,4, model,"player 2");
+			model.pawns[2] = new Pawn(2,4, model,"player 3");
+			model.pawns[3] = new Pawn(4,2, model,"player 4");
+			SwingUtilities.invokeLater(new GUI(model));
+		}
+
 	}
 
 }

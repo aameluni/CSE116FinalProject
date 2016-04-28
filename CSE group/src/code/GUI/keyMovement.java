@@ -46,8 +46,8 @@ public class keyMovement implements KeyListener {
 	            _pawn.move("North");
 	            System.out.println(_pawn.checkIfValidMove());
 	            if(_pawn.validMove){
-	            	_pawn.pickUpToken();
-	            	System.out.println(_pawn.tokenCount());
+	            	//_pawn.pickUpToken();
+	            	//System.out.println(_pawn.tokenCount());
 	            }
 	            _model.gameChanged();
 	            break;
@@ -55,8 +55,8 @@ public class keyMovement implements KeyListener {
 	        	_pawn.move("South");
 	        	System.out.println(_pawn.checkIfValidMove());
 	        	if(_pawn.validMove){
-	            	_pawn.pickUpToken();
-	            	System.out.println(_pawn.tokenCount());
+	            	//_pawn.pickUpToken();
+	            	//System.out.println(_pawn.tokenCount());
 	            }
 	        	_model.gameChanged();
 	            break;
@@ -64,8 +64,8 @@ public class keyMovement implements KeyListener {
 	        	_pawn.move("West");
 	        	System.out.println(_pawn.checkIfValidMove());
 	        	if(_pawn.validMove){
-	            	_pawn.pickUpToken();
-	            	System.out.println(_pawn.tokenCount());
+	            	//_pawn.pickUpToken();
+	            	//System.out.println(_pawn.tokenCount());
 	            }
 	        	_model.gameChanged();
 	            break;
@@ -73,8 +73,8 @@ public class keyMovement implements KeyListener {
 	        	_pawn.move("East");
 	        	System.out.println(_pawn.checkIfValidMove());
 	        	if(_pawn.validMove){
-	            	_pawn.pickUpToken();
-	            	System.out.println(_pawn.tokenCount());
+	            	//_pawn.pickUpToken();
+	            	//System.out.println(_pawn.tokenCount());
 	            }
 	        	_model.gameChanged();
 	            break;
@@ -83,8 +83,8 @@ public class keyMovement implements KeyListener {
 	            _pawn.move("North");
 	            System.out.println(_pawn.checkIfValidMove());
 	            if(_pawn.validMove){
-	            	_pawn.pickUpToken();
-	            	System.out.println(_pawn.tokenCount());
+	            	//_pawn.pickUpToken();
+	            	//System.out.println(_pawn.tokenCount());
 	            }
 	            _model.gameChanged();
 	            break;
@@ -92,8 +92,8 @@ public class keyMovement implements KeyListener {
 	        	_pawn.move("South");
 	        	System.out.println(_pawn.checkIfValidMove());
 	        	if(_pawn.validMove){
-	            	_pawn.pickUpToken();
-	            	System.out.println(_pawn.tokenCount());
+	            	//_pawn.pickUpToken();
+	            	//System.out.println(_pawn.tokenCount());
 	            }
 	        	_model.gameChanged();
 	            break;
@@ -101,8 +101,8 @@ public class keyMovement implements KeyListener {
 	        	_pawn.move("West");
 	        	System.out.println(_pawn.checkIfValidMove());
 	        	if(_pawn.validMove){
-	            	_pawn.pickUpToken();
-	            	System.out.println(_pawn.tokenCount());
+	            	//_pawn.pickUpToken();
+	            	//System.out.println(_pawn.tokenCount());
 	            }
 	        	_model.gameChanged();
 	            break;
@@ -110,8 +110,8 @@ public class keyMovement implements KeyListener {
 	        	_pawn.move("East");
 	        	System.out.println(_pawn.checkIfValidMove());
 	        	if(_pawn.validMove){
-	            	_pawn.pickUpToken();
-	            	System.out.println(_pawn.tokenCount());
+	            	//_pawn.pickUpToken();
+	            	//System.out.println(_pawn.tokenCount());
 	            }
 	        	_model.gameChanged();
 	            break;    

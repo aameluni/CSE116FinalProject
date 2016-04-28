@@ -2,6 +2,7 @@ package code.pawn;
 
 import java.util.ArrayList;
 
+import code.Recipe;
 import code.Model.Model;
 import code.Tokens.Token;
 
@@ -60,7 +61,7 @@ public class Pawn {
 	
 	private String player ="";
 	
-	
+	private Recipe r;
 	/**
 	 * @author Wiechec
 	 * Method can create a pawn at a specified position for game creation.
@@ -78,7 +79,8 @@ public class Pawn {
 		
 		startX = x;
 		startY = y;
-		
+		r = new Recipe();
+		System.out.println(r);
 	}
 	
 	/**
@@ -111,6 +113,7 @@ public class Pawn {
 	public void setCurrentLocation(int y, int x){
 		this.positionX = x;
 		this.positionY = y;
+		System.out.println("Move Has Been Made");
 	}
 	/**
 	 * @author Wiechec
@@ -217,8 +220,8 @@ public class Pawn {
 	 * Future method implementation for initial game creation. Pawn will get the formula in the future,
 	 * once that portion of the code has been implemented.
 	 */
-	public void getFormula(){
-		
+	public Recipe getFormula(){
+		return r;
 	}
 	/**
 	 * @author Wiechec
@@ -291,9 +294,11 @@ public class Pawn {
 							board.pawns[board.playerUp-1].startX = board.pawns[board.playerUp-1].getPositionX();
 							board.pawns[board.playerUp-1].startY = board.pawns[board.playerUp-1].getPositionY();
 						}
-						board.firstMove = true;
-						board.playerUp = board.playerUp + 1;
-						if(board.playerUp>4)board.playerUp = 1;
+//						board.firstMove = true;
+//						board.playerUp = board.playerUp + 1;
+//						if(board.pawns[2]==null && board.playerUp>2)board.playerUp = 1;
+//						if(board.pawns[3]==null && board.playerUp>3)board.playerUp = 1;
+//						if(board.playerUp>4)board.playerUp = 1;
 						board.gameChanged();
 					}
 				
@@ -309,6 +314,20 @@ public class Pawn {
 	 */	
 	public String getPlayer(){
 		return this.player;
+	}
+	public int getMagicWands()
+	{
+		return wcount;
+	}
+	public void useMagicWand() {
+		// TODO Auto-generated method stub
+		if(wcount >0  && board.firstMove==false)
+			{
+			wcount--;
+			board.firstMove = true;
+			}
+		board.gameChanged();
+		
 	}
 	
 

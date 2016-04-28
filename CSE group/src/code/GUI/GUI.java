@@ -34,6 +34,8 @@ public class  GUI implements Runnable, Observer {
 	private Model _model;
 	
 	private keyMovement key;
+	private JButton Token;
+	private JButton MagicWands;
 	
 	/**
 	 * @author <jtmirfie>
@@ -92,6 +94,11 @@ public class  GUI implements Runnable, Observer {
 		_endTurn = new JButton("End Turn");
 		_endTurn.setFocusable(false);
 		_endTurn.addActionListener(new endTurnListener(_model));
+		MagicWands = new JButton("Use Magic Wand!");
+		MagicWands.addActionListener(new UseMagicWand(_model,_model.pawns[_model.playerUp-1]));
+		MagicWands.setFocusable(false);
+		_rotatePanel.add(MagicWands);
+		
 		_player = new JButton(_model.pawns[0].getPlayer());
 		_player.setOpaque(true);
 		_player.setBackground(Color.orange);
@@ -99,7 +106,9 @@ public class  GUI implements Runnable, Observer {
 		_rotatePanel.add(_endTurn);
 		_offGamePanel.add(_rotatePanel);
 		_offGamePanel.add(_player);
-		
+		Token  = new JButton("Token Pickup");
+		_offGamePanel.add(Token);
+		Token.addActionListener(new TokenPickup(_model,_model.pawns[_model.playerUp-1]));
 		key = new keyMovement(_model,_model.pawns[_model.playerUp-1]);
 		_gameFrame.addKeyListener(key);
 		_gameFrame.getContentPane().add(_gamePanel,BorderLayout.WEST);
@@ -230,6 +239,7 @@ public class  GUI implements Runnable, Observer {
 			_offGamePanel.remove(_rotatePanel);
 			_offGamePanel.remove(_holdPanel);
 			_offGamePanel.remove(_player);
+			_offGamePanel.remove(Token);
 			_player = new JButton(_model.pawns[_model.playerUp-1].getPlayer());
 			_player.setOpaque(true);
 			if(_model.playerUp==1)_player.setBackground(Color.orange);
@@ -238,6 +248,7 @@ public class  GUI implements Runnable, Observer {
 			if(_model.playerUp==4)_player.setBackground(Color.green);
 			_rotatePanel.remove(_rotateButton);
 			_rotatePanel.remove(_endTurn);
+			_rotatePanel.remove(MagicWands);
 			
 			_holdPanel = new TilesUI(_model.getHoldTile(),_model,10,10).returnPanel();
 			_holdPanel.setFocusable(true);
@@ -257,12 +268,19 @@ public class  GUI implements Runnable, Observer {
 			_endTurn = new JButton("End Turn");
 			_endTurn.addActionListener(new endTurnListener(_model));
 			_endTurn.setFocusable(false);
+			MagicWands = new JButton("Use Magic Wand!");
+			MagicWands.addActionListener(new UseMagicWand(_model,_model.pawns[_model.playerUp-1]));
+			MagicWands.setFocusable(false);
+			_rotatePanel.add(MagicWands);
 			_rotatePanel.add(_rotateButton);
-			_rotatePanel.add(_endTurn);
+			_rotatePanel.add(_endTurn);	
 			_offGamePanel.add(_holdPanel);
 			_offGamePanel.add(_rotatePanel);
 			_offGamePanel.add(_player);
 			key = new keyMovement(_model,_model.pawns[_model.playerUp-1]);
+			Token = new JButton("Token Pickup");
+			Token.addActionListener(new TokenPickup(_model,_model.pawns[_model.playerUp-1]));
+			_offGamePanel.add(Token);
 			_gameFrame.addKeyListener(key);
 			_gameFrame.pack();
 			_gameFrame.repaint();	

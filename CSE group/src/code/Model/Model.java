@@ -277,7 +277,7 @@ public class Model {
 					}
 				}
 				for(int i=0;i<7;i++){
-					if(pawns[2].getPositionX()==col+i && pawns[2].getPositionY()==row){
+					if(pawns[2] !=null && pawns[2].getPositionX()==col+i && pawns[2].getPositionY()==row){
 						if(pawns[2].getPositionX()+1>6){
 							pawns[2].setCurrentLocation(pawns[0].getPositionY(), pawns[2].getPositionX()-6);
 							break;
@@ -287,7 +287,7 @@ public class Model {
 					}
 				}
 				for(int i=0;i<7;i++){
-					if(pawns[3].getPositionX()==col+i && pawns[3].getPositionY()==row){
+					if(pawns[3] !=null && pawns[3].getPositionX()==col+i && pawns[3].getPositionY()==row){
 						if(pawns[3].getPositionX()+1>6){
 							pawns[3].setCurrentLocation(pawns[3].getPositionY(), pawns[3].getPositionX()-6);
 							break;
@@ -336,7 +336,7 @@ public class Model {
 					}
 				}
 				for(int i=0;i<7;i++){
-					if(pawns[2].getPositionX()==col && pawns[2].getPositionY()==row+i){
+					if(pawns[2]!= null && pawns[2].getPositionX()==col && pawns[2].getPositionY()==row+i){
 						if(pawns[2].getPositionY()+1>6){
 							pawns[2].setCurrentLocation(pawns[2].getPositionY()-6, pawns[2].getPositionX());
 							break;
@@ -346,7 +346,7 @@ public class Model {
 					}
 				}
 				for(int i=0;i<7;i++){
-					if(pawns[3].getPositionX()==col && pawns[3].getPositionY()==row+i){
+					if(pawns[3] !=null && pawns[3].getPositionX()==col && pawns[3].getPositionY()==row+i){
 						if(pawns[3].getPositionY()+1>6){
 							pawns[3].setCurrentLocation(pawns[3].getPositionY()-6, pawns[3].getPositionX());
 							break;
@@ -395,7 +395,7 @@ public class Model {
 					}
 				}
 				for(int i=0;i<7;i++){
-					if(pawns[2].getPositionX()==col-i && pawns[2].getPositionY()==row){
+					if(pawns[2]!=null && pawns[2].getPositionX()==col-i && pawns[2].getPositionY()==row){
 						if(pawns[2].getPositionX()-1<0){
 							pawns[2].setCurrentLocation(pawns[2].getPositionY(), pawns[2].getPositionX()+6);
 							break;
@@ -405,7 +405,7 @@ public class Model {
 					}
 				}
 				for(int i=0;i<7;i++){
-					if(pawns[3].getPositionX()==col-i && pawns[3].getPositionY()==row){
+					if(pawns[3]!=null && pawns[3].getPositionX()==col-i && pawns[3].getPositionY()==row){
 						if(pawns[3].getPositionX()-1<0){
 							pawns[3].setCurrentLocation(pawns[3].getPositionY(), pawns[3].getPositionX()+6);
 							break;
@@ -453,7 +453,7 @@ public class Model {
 					}
 				}
 				for(int i=0;i<7;i++){
-					if(pawns[2].getPositionX()==col && pawns[2].getPositionY()==row-i){
+					if(pawns[2] !=null && pawns[2].getPositionX()==col && pawns[2].getPositionY()==row-i){
 						if(pawns[2].getPositionY()-1<0){
 							pawns[2].setCurrentLocation(pawns[2].getPositionY()+6, pawns[2].getPositionX());
 							break;
@@ -463,7 +463,7 @@ public class Model {
 					}
 				}
 				for(int i=0;i<7;i++){
-					if(pawns[3].getPositionX()==col && pawns[3].getPositionY()==row-i){
+					if(pawns[3] !=null && pawns[3].getPositionX()==col && pawns[3].getPositionY()==row-i){
 						if(pawns[3].getPositionY()-1<0){
 							pawns[3].setCurrentLocation(pawns[3].getPositionY()+6, pawns[3].getPositionX());
 							break;
@@ -546,8 +546,14 @@ public class Model {
 			System.out.println(pawns[0].getPlayer() +":");
 			System.out.println(pawns[0].tokenCount());
 			for(int i=0;i<pawns[0].tokenCount().size();i++){
-				player1score= player1score +pawns[0].tokenCount().get(i);
+				player1score += pawns[0].tokenCount().get(i);
+				for(int f=0; f<pawns[0].getFormula().getRecipe().length;f++)
+				{
+					if(pawns[0].tokenCount().get(i)==pawns[0].getFormula().getRecipe()[f])
+						player1score+=20;
+				}
 			}
+			player1score += pawns[0].getMagicWands()*3;
 			System.out.println("Score: "+player1score);
 			System.out.println();
 			
@@ -555,7 +561,13 @@ public class Model {
 			System.out.println(pawns[1].tokenCount());
 			for(int i=0;i<pawns[1].tokenCount().size();i++){
 				player2score= player2score +pawns[1].tokenCount().get(i);
+				for(int f=0; f<pawns[1].getFormula().getRecipe().length;f++)
+				{
+					if(pawns[1].tokenCount().get(i)==pawns[1].getFormula().getRecipe()[f])
+						player2score+=20;
+				}
 			}
+			player2score += pawns[1].getMagicWands()*3;
 			System.out.println("Score: "+player2score);
 			System.out.println();
 			
@@ -563,7 +575,13 @@ public class Model {
 			System.out.println(pawns[2].tokenCount());
 			for(int i=0;i<pawns[2].tokenCount().size();i++){
 				player3score= player3score +pawns[2].tokenCount().get(i);
+				for(int f=0; f<pawns[2].getFormula().getRecipe().length;f++)
+				{
+					if(pawns[2].tokenCount().get(i)==pawns[2].getFormula().getRecipe()[f])
+						player3score+=20;
+				}
 			}
+			player3score += pawns[2].getMagicWands()*3;
 			System.out.println("Score: "+player3score);
 			System.out.println();
 			
@@ -571,7 +589,13 @@ public class Model {
 			System.out.println(pawns[3].tokenCount());
 			for(int i=0;i<pawns[3].tokenCount().size();i++){
 				player4score= player4score +pawns[3].tokenCount().get(i);
+				for(int f=0; f<pawns[3].getFormula().getRecipe().length;f++)
+				{
+					if(pawns[3].tokenCount().get(i)==pawns[3].getFormula().getRecipe()[f])
+						player4score+=20;
+				}
 			}
+			player4score += pawns[3].getMagicWands()*3;
 			System.out.println("Score: "+player4score);
 			System.out.println();
 			

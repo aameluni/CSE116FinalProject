@@ -83,10 +83,10 @@ public class TilesUI {
 							else if(_model.pawns[1].getPositionX()==x && _model.pawns[1].getPositionY()==y){
 								_j.setBackground(red);
 							}
-							else if(_model.pawns[2].getPositionX()==x && _model.pawns[2].getPositionY()==y){
+							else if(_model.pawns[2]!=null && _model.pawns[2].getPositionX()==x && _model.pawns[2].getPositionY()==y){
 								_j.setBackground(blue);
 							}
-							else if(_model.pawns[3].getPositionX()==x && _model.pawns[3].getPositionY()==y){
+							else if(_model.pawns[3]!=null && _model.pawns[3].getPositionX()==x && _model.pawns[3].getPositionY()==y){
 								_j.setBackground(green);
 							}
 						else{
