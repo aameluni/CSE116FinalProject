@@ -1,6 +1,7 @@
 package code.Model;
 
 import java.awt.Point;
+import java.io.File;
 import java.util.Arrays;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import code.Tiles.TTile;
 import code.Tiles.Tiles;
 import code.Tokens.Token;
 import code.pawn.Pawn;
+import fileConverter.FileConv;
 
 public class Model {
 		
@@ -27,6 +29,7 @@ public class Model {
 		public Pawn[] pawns;
 		public int tokenCounter = 1;
 		public int playerUp = 1;
+		private FileConv f;
 		
 		/**
 		 * @author Wiechec - Constructor
@@ -42,6 +45,7 @@ public class Model {
 			this.setStaticTiles();
 			this.setBoard();
 			pawns = new Pawn[4];
+			f = new FileConv(this);
 		}
 		/**
 		 * @author Wiechec
@@ -600,6 +604,44 @@ public class Model {
 			System.out.println();
 			
 			System.exit(0);
+		}
+		public void restore(File fi)
+		{
+			f.setFile(fi);
+			f.read();
+			gameChanged();
+		}
+		public void save()
+		{
+			f.save();
+		}
+		public String toString()
+		{
+			return "hello\nhi\n9";
+		}
+		public void setPlayers(String s) {
+			int wand = 0;
+			int commas = 0;
+			String name="";
+			String color="";
+			String card = ""; //make recipe do this part to make it less confusing
+			String tokenlist = ""; //make pawn do this part like the recipe
+			//since players coordinates will change with the tile setup, just default the players to 0,0 for now
+			// Pawn rPlayer = new Pawn(0, 0, this, name);
+			//Pawn.setWRecipe(card);
+			//Pawn.setWCount(wand);
+			//if(color== ______)
+			//pawns[color's idx] = rPlayer; 
+			
+			
+			
+		}
+		public void setTiles(String s) {
+			int tct = 0;
+			int ict = 0;
+			int lct = 0;
+			int token = 0;
+			//pawn.setCurrentLocation(y,x);
 		}
 		
 }
