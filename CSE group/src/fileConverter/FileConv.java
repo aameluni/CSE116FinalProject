@@ -29,7 +29,12 @@ public class FileConv {
 					System.out.println("Save Complete");
 				}
 				else 
+					{
 					System.out.println("File Already Exists");
+					f.delete();
+					System.out.println("Overwritten");
+					save();
+					}
 			} catch (IOException e1) {
 				System.out.println("Failed to Save");
 			}

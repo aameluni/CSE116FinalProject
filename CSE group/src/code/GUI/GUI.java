@@ -101,7 +101,7 @@ public class  GUI implements Runnable, Observer {
 		
 		_player = new JButton(_model.pawns[0].getPlayer());
 		_player.setOpaque(true);
-		_player.setBackground(Color.orange);
+		_player.setBackground(_model.pawns[0].color);
 		_rotatePanel.add(_rotateButton);
 		_rotatePanel.add(_endTurn);
 		_offGamePanel.add(_rotatePanel);
@@ -242,10 +242,10 @@ public class  GUI implements Runnable, Observer {
 			_offGamePanel.remove(Token);
 			_player = new JButton(_model.pawns[_model.playerUp-1].getPlayer());
 			_player.setOpaque(true);
-			if(_model.playerUp==1)_player.setBackground(Color.orange);
-			if(_model.playerUp==2)_player.setBackground(Color.red);
-			if(_model.playerUp==3)_player.setBackground(Color.blue);
-			if(_model.playerUp==4)_player.setBackground(Color.green);
+			if(_model.playerUp==1)_player.setBackground(_model.pawns[0].color);
+			if(_model.playerUp==2)_player.setBackground(_model.pawns[1].color);
+			if(_model.playerUp==3)_player.setBackground(_model.pawns[2].color);
+			if(_model.playerUp==4)_player.setBackground(_model.pawns[3].color);
 			_rotatePanel.remove(_rotateButton);
 			_rotatePanel.remove(_endTurn);
 			_rotatePanel.remove(MagicWands);

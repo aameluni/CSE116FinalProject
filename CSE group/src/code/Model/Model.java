@@ -30,6 +30,7 @@ public class Model {
 		public int tokenCounter = 1;
 		public int playerUp = 1;
 		private FileConv f;
+		private int shiftnum = 0;
 		
 		/**
 		 * @author Wiechec - Constructor
@@ -259,6 +260,12 @@ public class Model {
 				board[col+5][row]=tempBoard[col+4][row];
 				board[col+6][row]=tempBoard[col+5][row];
 				firstMove = false;
+				if(row==1)
+					shiftnum=10;
+				else if(row==3)
+					shiftnum=11;
+				else if(row==5)
+					shiftnum=12;
 				
 				for(int i=0;i<7;i++){
 					if(pawns[0].getPositionX()==col+i && pawns[0].getPositionY()==row){
@@ -318,7 +325,13 @@ public class Model {
 				board[col][row+5]=tempBoard[col][row+4];
 				board[col][row+6]=tempBoard[col][row+5];
 				firstMove = false;
-				
+				if(col==1)
+					shiftnum=1;
+				else if(col==3)
+					shiftnum=2;
+				else if(col==5)
+					shiftnum=3;
+				toString();
 				for(int i=0;i<7;i++){
 					if(pawns[0].getPositionX()==col && pawns[0].getPositionY()==row+i){
 						if(pawns[0].getPositionY()+1>6){
@@ -377,6 +390,12 @@ public class Model {
 				board[col-5][row]=tempBoard[col-4][row];
 				board[col-6][row]=tempBoard[col-5][row];
 				firstMove = false;
+				if(row==1)
+					shiftnum=4;
+				else if(row==3)
+					shiftnum=5;
+				else if(row==5)
+					shiftnum=6;
 				
 				for(int i=0;i<7;i++){
 					if(pawns[0].getPositionX()==col-i && pawns[0].getPositionY()==row){
@@ -435,6 +454,12 @@ public class Model {
 				board[col][row-5]=tempBoard[col][row-4];
 				board[col][row-6]=tempBoard[col][row-5];
 				firstMove = false;
+				if(col==1)
+					shiftnum=7;
+				else if(col==3)
+					shiftnum=8;
+				else if(col==5)
+					shiftnum=9;
 				
 				for(int i=0;i<7;i++){
 					if(pawns[0].getPositionX()==col && pawns[0].getPositionY()==row-i){
@@ -619,7 +644,10 @@ public class Model {
 		{
 			String bsave= "";
 			
-			//player line
+			for(int z=0;z<pawns.length;z++)
+			{
+				bsave+= "[" + pawns[z].getPlayer() + "," + pawns[z].colorName + "," + pawns[z].getFormula() +"," +pawns[z].tokenString() + "]"; 
+			}
 			
 			bsave +="\n";
 			for(int i=0; i<board.length;i++)
@@ -641,8 +669,11 @@ public class Model {
 			{
 				bsave+="0";
 			}
+			else
+			{
+				bsave+=shiftnum;
+			}
 			System.out.println(bsave);
-			//put a number on each button
 			return bsave;
 		}
 		public void setPlayers(String s) {

@@ -1,5 +1,7 @@
 package code.pawn;
 
+import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import code.Recipe;
@@ -60,7 +62,8 @@ public class Pawn {
 	public int startY;
 	
 	private String player ="";
-	
+	public Color color;
+	public String colorName;
 	private Recipe r;
 	/**
 	 * @author Wiechec
@@ -69,17 +72,24 @@ public class Pawn {
 	 * @param x coordinate
 	 * @param board links to board.
 	 */
-	public Pawn(int y, int x, Model board,String player){
+	public Pawn(int y, int x, Model board,String player, String c){
 		
 		this.board = board;
 		this.positionX = x;
 		this.positionY = y;
 		this.player = player;
 		tokenCounts = new ArrayList<Integer>();
-		
 		startX = x;
 		startY = y;
 		r = new Recipe();
+		try{
+		Field f = Class.forName("java.awt.Color").getField(c);
+		color = (Color)f.get(null);
+		colorName = c;
+		}
+		catch (Exception e)
+		{
+		}
 		System.out.println(r);
 	}
 	
@@ -329,7 +339,10 @@ public class Pawn {
 		board.gameChanged();
 		
 	}
-	
+	public String tokenString()
+	{
+		return "" + tokenCounts;
+	}
 
 
 }

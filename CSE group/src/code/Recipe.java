@@ -33,6 +33,6 @@ public class Recipe {
 	}
 	public String toString()
 	{
-		return tokens[0] + ", " + tokens[1] + ", " + tokens[2];
+		return "[" + tokens[0] + "," + tokens[1] + "," + tokens[2] + "]";
 	}
 }

@@ -27,8 +27,8 @@ public class Playermovement {
 	 */
 	public void commonAbleMoveBoolTest(String dir, Boolean expected){
 		Model b = new Model("test");
-		Pawn p = new Pawn(2,2,b,"");
-		Pawn d = new Pawn(4,4,b,"");
+		Pawn p = new Pawn(2,2,b,"","red");
+		Pawn d = new Pawn(4,4,b,"","red");
 		Boolean actual = p.canMove(dir);
 		assertTrue("Expected: "+expected+" Result: "+actual,expected==actual);
 		
@@ -40,7 +40,7 @@ public class Playermovement {
 	 */
 	public void commonAbleMoveBoolTestD(String dir, Boolean expected){
 		Model b = new Model("test");
-	    Pawn d = new Pawn(4,4,b,"");
+	    Pawn d = new Pawn(4,4,b,"","red");
 		Boolean actual = d.canMove(dir);
 		assertTrue("Expected: "+expected+" Result: "+actual,expected==actual);
 		
