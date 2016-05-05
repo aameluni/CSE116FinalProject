@@ -617,7 +617,33 @@ public class Model {
 		}
 		public String toString()
 		{
-			return "hello\nhi\n9";
+			String bsave= "";
+			
+			//player line
+			
+			bsave +="\n";
+			for(int i=0; i<board.length;i++)
+			{
+				for(int j=0;j<board[i].length;j++)
+				{
+					bsave+="["+board[i][j].sName + ",";  
+					if(board[i][j].hasToken)
+						bsave+=board[i][j].getToken().getValue();
+					else
+						bsave+="0";
+					bsave += ",[]";
+				}
+			}
+			
+			bsave +="\n";
+			
+			if(firstMove)
+			{
+				bsave+="0";
+			}
+			System.out.println(bsave);
+			//put a number on each button
+			return bsave;
 		}
 		public void setPlayers(String s) {
 			int wand = 0;

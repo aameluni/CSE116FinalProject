@@ -44,25 +44,48 @@ public class TTile  extends Tiles{
 			this._east = true;
 			this._west = true;
 			this._south = false;
+			this.sName = "T2";
 			break;
 		case "South":
 			this._north = false;
 			this._east = true;
 			this._west = true;
 			this._south = true;
+			this.sName = "T0";
 			break;
 		case "East":
 			this._north = true;
 			this._east = true;
 			this._west = false;
 			this._south = true;
+			this.sName = "T3";
 			break;
 		case "West":
 			this._north = true;
 			this._east = false;
 			this._west = true;
 			this._south = true;
+			this.sName = "T1";
 			break;
+		}
+	}
+	public void Rotation(String tx)
+	{
+		if(tx.equals("T0"))
+		{
+			Rotate("South");
+		}
+		if(tx.equals("T1"))
+		{
+			Rotate("West");
+		}
+		if(tx.equals("T2"))
+		{
+			Rotate("North");
+		}
+		if(tx.equals("T3"))
+		{
+			Rotate("East");
 		}
 	}
 }

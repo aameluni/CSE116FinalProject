@@ -60,6 +60,8 @@ import code.Tokens.Token;
 	public Boolean player = false;
 	
 	public boolean isStart = false;
+	
+	public String sName = "";
 
 	/**
 	 * @author Wiechec
@@ -163,7 +165,9 @@ import code.Tokens.Token;
 		token = _token;
 	}
 	public Token getToken(){
+		if(checkToken())
 		return token;
+		else return null;
 	}
 	public boolean checkToken(){
 		return hasToken;

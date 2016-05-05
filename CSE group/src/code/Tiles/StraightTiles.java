@@ -44,25 +44,40 @@ public class StraightTiles extends Tiles{
 			this._east = false;
 			this._west = false;
 			this._south = true;
+			this.sName = "I0";
 			break;
 		case "South":
 			this._north = true;
 			this._east = false;
 			this._west = false;
 			this._south = true;
+			this.sName = "I2";
 			break;
 		case "East":
 			this._north = false;
 			this._east = true;
 			this._west = true;
 			this._south = false;
+			this.sName = "I3";
 			break;
 		case "West":
 			this._north = false;
 			this._east = true;
 			this._west = true;
 			this._south = false;
+			this.sName = "I1";
 			break;
+		}
+	}
+	public void Rotation(String tx)
+	{
+		if(tx.equals("I0")||tx.equals("I2"))
+		{
+			Rotate("North");
+		}
+		if(tx.equals("I1")||tx.equals("I3"))
+		{
+			Rotate("East");
 		}
 	}
 }

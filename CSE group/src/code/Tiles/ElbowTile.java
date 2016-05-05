@@ -24,7 +24,7 @@ public class ElbowTile extends Tiles {
 	 * Constructor creates a tile, but returns a tile defaulted into the NORTH orientation.
 	 */
 	public ElbowTile(){
-		
+		this.Rotate("North");
 	}
 	/**
 	 * @author Wiechec
@@ -44,26 +44,48 @@ public class ElbowTile extends Tiles {
 			this._east = true;
 			this._west = false;
 			this._south = false;
+			this.sName = "L3";
 			break;
 		case "South":
 			this._north = false;
 			this._east = false;
 			this._west = true;
 			this._south = true;
+			this.sName = "L1";
 			break;
 		case "East":
 			this._north = false;
 			this._east = true;
 			this._west = false;
 			this._south = true;
+			this.sName = "L0";
 			break;
 		case "West":
 			this._north = true;
 			this._east = false;
 			this._west = true;
 			this._south = false;
+			this.sName = "L2";
 			break;
 		}
 	}
-	
+	public void Rotation(String tx)
+	{
+		if(tx.equals("L0"))
+		{
+			Rotate("East");
+		}
+		if(tx.equals("L1"))
+		{
+			Rotate("South");
+		}
+		if(tx.equals("L2"))
+		{
+			Rotate("West");
+		}
+		if(tx.equals("L3"))
+		{
+			Rotate("North");
+		}
+	}
 }
