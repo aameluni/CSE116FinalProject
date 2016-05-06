@@ -37,6 +37,7 @@ public class  GUI implements Runnable, Observer {
 	private JButton Token;
 	private JButton MagicWands;
 	private JButton Save;
+	private JPanel pinfo = new JPanel();
 	
 	/**
 	 * @author <jtmirfie>
@@ -122,7 +123,22 @@ public class  GUI implements Runnable, Observer {
 		_gameFrame.getContentPane().add(_offGamePanel,BorderLayout.EAST);
 		_gameFrame.pack();
 		_gameFrame.setVisible(true);
-
+		pinfo = new JPanel();
+		_offGamePanel.add(pinfo);
+		JLabel wands = new JLabel();
+		JLabel recipe = new JLabel();
+		JLabel tokens = new JLabel();
+		pinfo.setLayout(new GridLayout(3,1));
+		wands.setText("Wands Left:"+_model.pawns[_model.playerUp-1].getMagicWands());
+		recipe.setText("Formula:"+_model.pawns[_model.playerUp-1].getFormula());
+		tokens.setText("Tokens:"+_model.pawns[_model.playerUp-1].tokenString());
+		pinfo.add(wands);
+		pinfo.add(recipe);
+		pinfo.add(tokens);
+		pinfo.setFocusable(false);
+		wands.setFocusable(false);
+		recipe.setFocusable(false);
+		tokens.setFocusable(false);
 		
 	}
 		
@@ -248,6 +264,7 @@ public class  GUI implements Runnable, Observer {
 			_offGamePanel.remove(_player);
 			_offGamePanel.remove(Token);
 			_offGamePanel.remove(Save);
+			_offGamePanel.remove(pinfo);
 			_player = new JButton(_model.pawns[_model.playerUp-1].getPlayer());
 			_player.setOpaque(true);
 			_player.setForeground(Color.white);
@@ -295,6 +312,22 @@ public class  GUI implements Runnable, Observer {
 			Save.setFocusable(false);
 			_offGamePanel.add(Token);
 			_offGamePanel.add(Save);
+			pinfo = new JPanel();
+			_offGamePanel.add(pinfo);
+			JLabel wands = new JLabel();
+			JLabel recipe = new JLabel();
+			JLabel tokens = new JLabel();
+			pinfo.setLayout(new GridLayout(3,1));
+			wands.setText("Wands Left:"+_model.pawns[_model.playerUp-1].getMagicWands());
+			recipe.setText("Formula:"+_model.pawns[_model.playerUp-1].getFormula());
+			tokens.setText("Tokens:"+_model.pawns[_model.playerUp-1].tokenString());
+			pinfo.add(wands);
+			pinfo.add(recipe);
+			pinfo.add(tokens);
+			pinfo.setFocusable(false);
+			wands.setFocusable(false);
+			recipe.setFocusable(false);
+			tokens.setFocusable(false);
 			_gameFrame.addKeyListener(key);
 			_gameFrame.pack();
 			_gameFrame.repaint();	
