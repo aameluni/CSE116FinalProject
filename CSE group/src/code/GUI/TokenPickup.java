@@ -17,6 +17,7 @@ public class TokenPickup implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(!_model.firstMove)
 		_pawn.pickUpToken();
 	}
 

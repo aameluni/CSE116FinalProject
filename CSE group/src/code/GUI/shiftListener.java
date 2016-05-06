@@ -10,7 +10,7 @@ public class shiftListener implements ActionListener {
 	private Model _model;
 	private int col;
 	private int row;
-	
+	private int idx;
 	/**
 	 * @author <jtmirfie>
 	 * Constructor
@@ -19,10 +19,11 @@ public class shiftListener implements ActionListener {
 	 * @param x value associated with the column of the button to be shifted.
 	 * @param y value associated with the row of the button to be shifted.
 	 */	
-	public shiftListener(Model m,int x, int y){
+	public shiftListener(Model m,int x, int y, int i){
 		_model=m;
 		col = x;
 		row = y;
+		idx = i;
 	}
 	
 	/**
@@ -32,6 +33,11 @@ public class shiftListener implements ActionListener {
 	 */	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(idx==_model.shiftDisable)
+		{
+			
+		}
+		else
 		_model.moveTiles(col,row);
 	}
 

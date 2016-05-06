@@ -1,6 +1,10 @@
 package code.Tiles;
 
+import java.util.ArrayList;
+
+import code.Model.Model;
 import code.Tokens.Token;
+import code.pawn.Pawn;
 
 /**
  * Class is the parent class for all the Tile classes in the game. File is fully defined with the exception of
@@ -163,6 +167,10 @@ import code.Tokens.Token;
 	}
 	public void setToken(Token _token){
 		token = _token;
+		if(token.getValue()>0)
+		{
+			hasToken=true;
+		}
 	}
 	public Token getToken(){
 		if(checkToken())

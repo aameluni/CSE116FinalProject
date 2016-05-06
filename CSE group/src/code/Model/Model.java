@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
+import code.Recipe;
 import code.Tiles.ElbowTile;
 import code.Tiles.StraightTiles;
 import code.Tiles.TTile;
@@ -31,7 +32,7 @@ public class Model {
 		public int playerUp = 1;
 		private FileConv f;
 		private int shiftnum = 0;
-		
+		public int shiftDisable =0;
 		/**
 		 * @author Wiechec - Constructor
 		 * Calls method for board creation and setting the permanent tiles via the set static method.
@@ -160,24 +161,30 @@ public class Model {
 			int ttiles = 6;
 			int elbow = 15;
 			int straight = 13;
+			int random = ((int)(Math.random()*3));
 			//CHANGED*********
 			for(int i=0; i<col; i++){
 				for(int j =0; j<rows; j++){
+					random = ((int)(Math.random()*3));
 					if(board[i][j]==null){
-						if(elbow>0){
+						if(elbow>0 && random==0){
 							board[i][j] = new ElbowTile("North");
 							elbow--;
-							continue;
 						}
-						if(straight>0){
+						else
+						if(straight>0 && random==1){
 							board[i][j] = new StraightTiles("East");
 							straight--;
-							continue;
 						}
-						if(ttiles>0){
+						else
+						if(ttiles>0 && random==2){
 							board[i][j] = new TTile("South");
 							ttiles--;
-							continue;
+						}
+						else
+						{
+							random = ((int)(Math.random()*3));
+							j--;
 						}
 						
 						
@@ -216,12 +223,12 @@ public class Model {
 				    }
 				}
 			
-			for(int col=0;col<7;col++){
+		/*	for(int col=0;col<7;col++){
 				for(int row=0;row<7;row++){					
 					if(board[col][row].checkToken())System.out.println("Col: "+col+ " " +"Row: "+ row + " Token: "+board[col][row].getToken().getValue());
 				}
 			}
-			
+		*/	
 			
 			
 		}
@@ -260,13 +267,20 @@ public class Model {
 				board[col+5][row]=tempBoard[col+4][row];
 				board[col+6][row]=tempBoard[col+5][row];
 				firstMove = false;
-				if(row==1)
+				if(row==5)
+					{
 					shiftnum=10;
-				else if(row==3)
+					shiftDisable=6;
+					}
+				else if(row==3){
 					shiftnum=11;
-				else if(row==5)
+					shiftDisable=5;
+				}
+				else if(row==1)
+				{
 					shiftnum=12;
-				
+					shiftDisable=4;
+				}
 				for(int i=0;i<7;i++){
 					if(pawns[0].getPositionX()==col+i && pawns[0].getPositionY()==row){
 						if(pawns[0].getPositionX()+1>6){
@@ -326,11 +340,19 @@ public class Model {
 				board[col][row+6]=tempBoard[col][row+5];
 				firstMove = false;
 				if(col==1)
+				{
 					shiftnum=1;
+					shiftDisable=9;
+				}
 				else if(col==3)
+				{
 					shiftnum=2;
-				else if(col==5)
+					shiftDisable=8;
+				}
+				else if(col==5){
 					shiftnum=3;
+					shiftDisable=7;
+				}
 				toString();
 				for(int i=0;i<7;i++){
 					if(pawns[0].getPositionX()==col && pawns[0].getPositionY()==row+i){
@@ -391,12 +413,19 @@ public class Model {
 				board[col-6][row]=tempBoard[col-5][row];
 				firstMove = false;
 				if(row==1)
+				{
 					shiftnum=4;
-				else if(row==3)
+					shiftDisable=12;
+				}
+					else if(row==3){
 					shiftnum=5;
+					shiftDisable=11;
+					}
 				else if(row==5)
+				{
 					shiftnum=6;
-				
+					shiftDisable=10;
+				}
 				for(int i=0;i<7;i++){
 					if(pawns[0].getPositionX()==col-i && pawns[0].getPositionY()==row){
 						if(pawns[0].getPositionX()-1<0){
@@ -454,12 +483,21 @@ public class Model {
 				board[col][row-5]=tempBoard[col][row-4];
 				board[col][row-6]=tempBoard[col][row-5];
 				firstMove = false;
-				if(col==1)
+				if(col==5){
 					shiftnum=7;
+					shiftDisable=3;
+				}
 				else if(col==3)
+				{
 					shiftnum=8;
-				else if(col==5)
-					shiftnum=9;
+					shiftDisable=2;
+				}
+					else if(col==1)
+					{
+						shiftnum=9;
+						shiftDisable=1;
+					}
+				
 				
 				for(int i=0;i<7;i++){
 					if(pawns[0].getPositionX()==col && pawns[0].getPositionY()==row-i){
@@ -643,10 +681,21 @@ public class Model {
 		public String toString()
 		{
 			String bsave= "";
-			
-			for(int z=0;z<pawns.length;z++)
+			int idx=0;
+			int z=playerUp-1;
+			while(idx<pawns.length)
 			{
-				bsave+= "[" + pawns[z].getPlayer() + "," + pawns[z].colorName + "," + pawns[z].getFormula() +"," +pawns[z].tokenString() + "]"; 
+				if(idx<pawns.length-1)
+				bsave+= "[" + pawns[z].getPlayer() + "," + pawns[z].colorName + "," + pawns[z].getMagicWands() +"," + pawns[z].getFormula() +"," +pawns[z].tokenString() + "],"; 
+				else
+					bsave+= "[" + pawns[z].getPlayer() + "," + pawns[z].colorName + "," + pawns[z].getMagicWands() + "," + pawns[z].getFormula() +"," +pawns[z].tokenString() + "]"; 
+				idx++;
+				z++;
+				if(z==pawns.length)
+				{
+					z=0;
+				}
+				
 			}
 			
 			bsave +="\n";
@@ -654,51 +703,262 @@ public class Model {
 			{
 				for(int j=0;j<board[i].length;j++)
 				{
-					bsave+="["+board[i][j].sName + ",";  
-					if(board[i][j].hasToken)
-						bsave+=board[i][j].getToken().getValue();
+					bsave+="["+board[j][i].sName + ",";  
+					if(board[j][i].hasToken)
+						bsave+=board[j][i].getToken().getValue();
 					else
 						bsave+="0";
-					bsave += ",[]";
+					if(i==board.length-1 && j==board.length-1)
+						bsave += ","+ getPlayers(i,j) + "]" ;
+					else
+					bsave += ","+ getPlayers(i,j) + "]," ;
 				}
 			}
 			
 			bsave +="\n";
-			
-			if(firstMove)
-			{
-				bsave+="0";
-			}
-			else
-			{
-				bsave+=shiftnum;
-			}
+			bsave+=shiftnum;
 			System.out.println(bsave);
 			return bsave;
 		}
+		private ArrayList<String> getPlayers(int j, int i) {
+			ArrayList<String> p = new ArrayList<String>();
+			for(int z=0;z<pawns.length;z++)
+			{
+				if(pawns[z].getPositionX()==i && pawns[z].getPositionY() ==j)
+					p.add(pawns[z].colorName);
+			}
+			return p;
+			
+				
+		}
 		public void setPlayers(String s) {
 			int wand = 0;
-			int commas = 0;
+			int pidx = 0;
 			String name="";
 			String color="";
-			String card = ""; //make recipe do this part to make it less confusing
-			String tokenlist = ""; //make pawn do this part like the recipe
+			int sidx = 0;
+			String extract = "";
+			String excess = s;
+			int fidx = excess.indexOf("[")+1;
 			//since players coordinates will change with the tile setup, just default the players to 0,0 for now
 			// Pawn rPlayer = new Pawn(0, 0, this, name);
 			//Pawn.setWRecipe(card);
 			//Pawn.setWCount(wand);
 			//if(color== ______)
 			//pawns[color's idx] = rPlayer; 
+			while(sidx<excess.length()-2)
+			{
+			fidx = excess.indexOf("[")+1;
+			sidx = excess.indexOf(",");	
+			extract = excess.substring(fidx, sidx);
+			excess = excess.substring(sidx+1);
+			name = extract;
+			
+			fidx=0;
+			sidx = excess.indexOf(",");
+			extract = excess.substring(fidx,sidx);
+			excess  = excess.substring(sidx+1);
+			color = extract;
+			
+			fidx=0;
+			sidx = excess.indexOf(",");	
+			extract = excess.substring(fidx, sidx);
+			excess = excess.substring(sidx+2);
+			wand = Integer.parseInt(extract);
+			
+			fidx=0;
+			sidx = excess.indexOf("]");
+			extract = excess.substring(fidx,sidx);
+			excess = excess.substring(excess.indexOf("]")+2);
+			ArrayList<String> recipe  = new ArrayList<String>(Arrays.asList(extract.split(",")));
+			Recipe r = new Recipe(recipe);
+			
+			fidx = excess.indexOf("[")+1;
+			sidx = excess.indexOf("]");
+			extract = excess.substring(fidx,sidx);
 			
 			
-			
+			Pawn p = new Pawn(0,0,this,name, color);
+			p.setRecipe(r);
+			p.setWCount(wand);
+			pawns[pidx]=p;
+			if(extract.length()>0)
+			{
+			ArrayList<String> tokenes = new ArrayList<String>(Arrays.asList(extract.split(", ")));
+			pawns[pidx].setTokens(tokenes);
+			}
+			pidx++;
+			if(sidx+3>excess.length()){
+				break;
+			}
+			else
+			{
+				excess = excess.substring(sidx+3);
+				sidx=excess.indexOf(",");
+			}
+			}
 		}
 		public void setTiles(String s) {
 			int tct = 0;
 			int ict = 0;
 			int lct = 0;
-			int token = 0;
-			//pawn.setCurrentLocation(y,x);
+			int fidx = 1;
+			int sidx = 0;
+			String extract = "";
+			String excess = s;
+			for(int i=0;i<board.length;i++)
+			{
+				for(int j=0;j<board[i].length;j++)
+				{
+					fidx = 1;
+					sidx = excess.indexOf(",");
+					extract = excess.substring(fidx, sidx);
+					excess = excess.substring(sidx+1);
+					if(extract.charAt(0) == 'T')
+					{
+						board[j][i] = new TTile(Integer.parseInt(""+extract.charAt(1)));
+						tct++;
+					}
+					else
+						if(extract.charAt(0) == 'L')
+						{
+							board[j][i] = new ElbowTile(Integer.parseInt(""+extract.charAt(1)));
+							lct++;
+						}
+						else
+							if(extract.charAt(0) == 'I')
+							{
+								board[j][i] = new StraightTiles(Integer.parseInt(""+extract.charAt(1)));
+								ict++;
+							}
+					fidx= 0;
+					sidx = excess.indexOf(",");	
+					extract = excess.substring(fidx, sidx);
+					excess = excess.substring(sidx+1);
+					board[j][i].setToken(new Token(Integer.parseInt(extract)));
+					
+					fidx= 1;
+					sidx = excess.indexOf("]");	
+					extract = excess.substring(fidx, sidx);
+					if(sidx+3<excess.length())
+						excess = excess.substring(sidx+3);
+					fidx=0;
+					if(extract.length()>0)
+					{
+						ArrayList<String> colors  = new ArrayList<String>(Arrays.asList(extract.split(", ")));
+						setPlayerPos(colors,i,j);
+					}
+				}
+			}
+			if(tct<18)
+			{
+				this.hold = new TTile();
+			
+			}	
+			else if(ict<13)
+			{
+				hold = new StraightTiles();
+				
+			}
+			else if(lct<19)
+			{
+				hold = new ElbowTile();
+			}
+			minTokenRes();
+			
 		}
-		
+		public void setPlayerPos(ArrayList<String> o,int x,int y)
+		{
+			int idx = 0;
+			for(int i=0;i<pawns.length;i++)
+			{
+				if(idx<o.size() && pawns[i]!=null && pawns[i].colorName.equals(o.get(idx)))
+				{
+					pawns[i].setCurrentLocation(x, y);
+					idx++;
+				}
+				
+			}
+		}
+		public void setButtons(int i)
+		{
+			if(i==1)
+			{
+				shiftnum=1;
+				shiftDisable=9;
+			}
+			else if(i==2)
+			{
+				shiftnum=2;
+				shiftDisable=8;
+			}
+			else if(i==3)
+			{
+				shiftnum=3;
+				shiftDisable=7;
+			}else if(i==4)
+			{
+				shiftnum=4;
+				shiftDisable=12;
+			}else if(i==5)
+			{
+				shiftnum=5;
+				shiftDisable=11;
+			}else if(i==6)
+			{
+				shiftnum=6;
+				shiftDisable=10;
+			}else if(i==7)
+			{
+				shiftnum=7;
+				shiftDisable=3;
+			}else if(i==8)
+			{
+				shiftnum=8;
+				shiftDisable=2;
+			}else if(i==9)
+			{
+				shiftnum=9;
+				shiftDisable=1;
+			}else if(i==10)
+			{
+				shiftnum=10;
+				shiftDisable=6;
+			}else if(i==11)
+			{
+				shiftnum=11;
+				shiftDisable=5;
+			}else if(i==12)
+			{
+				shiftnum=12;
+				shiftDisable=4;
+			}
+		}
+		public void minTokenRes()
+		{
+			int min=25;
+			ArrayList<Integer> tokeners = new ArrayList<Integer>();
+			for(int i=0;i<pawns.length;i++)
+			{
+				if(pawns[i]!=null)
+				{
+					for(int j=0;j<pawns[i].tokenCount().size();j++)
+					{
+						tokeners.add(pawns[i].tokenCount().get(j));
+					}
+				}
+			}
+			for(int i=0;i<tokeners.size();i++)
+			{
+				if(tokeners.get(i)<min)
+				{
+					min=tokeners.get(i)+1;
+				}
+			}
+			if(tokeners.size()==0)
+			{
+				min=1;
+			}
+			tokenCounter = min;
+		}
 }

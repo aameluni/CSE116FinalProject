@@ -1,5 +1,7 @@
 package code;
 
+import java.util.ArrayList;
+
 public class Recipe {
 	/**
 	 * @author Wiechec
@@ -8,6 +10,13 @@ public class Recipe {
 	int[] tokens = new int[3];
 	public Recipe(){
 		setRecipe();
+	}
+	public Recipe(ArrayList<String> s)
+	{
+		for(int i=0;i<s.size();i++)
+		{
+			tokens[i] = Integer.parseInt(s.get(i));
+		}
 	}
 	public int[] getRecipe(){
 		return tokens;

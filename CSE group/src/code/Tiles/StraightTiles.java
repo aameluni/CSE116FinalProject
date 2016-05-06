@@ -19,6 +19,9 @@ public class StraightTiles extends Tiles{
 	public StraightTiles(String orientation){
 		this.Rotate(orientation);
 	}
+	public StraightTiles(int i){
+		Rotation("I"+i);
+	}
 	/**
 	 * @author Wiechec
 	 * Constructor creates a tile, but returns a tile defaulted into the NORTH orientation.

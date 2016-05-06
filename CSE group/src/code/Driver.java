@@ -45,7 +45,7 @@ public class Driver {
 			model.pawns[3] = new Pawn(4,2, model,args[3],"black");
 			SwingUtilities.invokeLater(new GUI(model));
 		}
-		model.toString();
 	}
+	
 
 }

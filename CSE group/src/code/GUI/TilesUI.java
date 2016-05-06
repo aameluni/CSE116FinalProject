@@ -60,7 +60,6 @@ public class TilesUI {
 		_panel.setLayout(new GridLayout(3,3));
 		_panel.setPreferredSize(new Dimension(125,125));
 		_panel.setBackground(Color.black);
-		
 		for(int i=0;i<3;i++){
 			
 			for(int z=0;z<3;z++){
@@ -80,7 +79,7 @@ public class TilesUI {
 							if (_model.pawns[0].getPositionX()==x && _model.pawns[0].getPositionY()==y) {
 								_j.setBackground(_model.pawns[0].color);
 							}
-							else if(_model.pawns[1].getPositionX()==x && _model.pawns[1].getPositionY()==y){
+							else if(_model.pawns[1]!=null&& _model.pawns[1].getPositionX()==x && _model.pawns[1].getPositionY()==y){
 								_j.setBackground(_model.pawns[1].color);
 							}
 							else if(_model.pawns[2]!=null && _model.pawns[2].getPositionX()==x && _model.pawns[2].getPositionY()==y){
@@ -97,6 +96,7 @@ public class TilesUI {
 							String temp = ""+_model.getBoard()[x][y].getToken().getValue();
 							_j.setBorder(null);
 							_j.setText(temp);
+							_j.setForeground(Color.white);
 							}
 						}
 					}

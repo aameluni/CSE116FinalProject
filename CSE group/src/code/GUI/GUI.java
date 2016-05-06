@@ -36,6 +36,7 @@ public class  GUI implements Runnable, Observer {
 	private keyMovement key;
 	private JButton Token;
 	private JButton MagicWands;
+	private JButton Save;
 	
 	/**
 	 * @author <jtmirfie>
@@ -101,6 +102,7 @@ public class  GUI implements Runnable, Observer {
 		
 		_player = new JButton(_model.pawns[0].getPlayer());
 		_player.setOpaque(true);
+		_player.setForeground(Color.white);
 		_player.setBackground(_model.pawns[0].color);
 		_rotatePanel.add(_rotateButton);
 		_rotatePanel.add(_endTurn);
@@ -108,7 +110,12 @@ public class  GUI implements Runnable, Observer {
 		_offGamePanel.add(_player);
 		Token  = new JButton("Token Pickup");
 		_offGamePanel.add(Token);
+		Save = new JButton("Save");
+		_offGamePanel.add(Save);
 		Token.addActionListener(new TokenPickup(_model,_model.pawns[_model.playerUp-1]));
+		Token.setFocusable(false);
+		Save.addActionListener(new Save(_model));
+		Save.setFocusable(false);
 		key = new keyMovement(_model,_model.pawns[_model.playerUp-1]);
 		_gameFrame.addKeyListener(key);
 		_gameFrame.getContentPane().add(_gamePanel,BorderLayout.WEST);
@@ -137,43 +144,43 @@ public class  GUI implements Runnable, Observer {
 			
 			
 			JButton westB1 = new JButton(">");
-			westB1.addActionListener(new shiftListener(_model,0,1));
+			westB1.addActionListener(new shiftListener(_model,0,1,12));
 			westB1.setFocusable(false);
 			JButton westB2 = new JButton(">");
-			westB2.addActionListener(new shiftListener(_model,0,3));
+			westB2.addActionListener(new shiftListener(_model,0,3,11));
 			westB2.setFocusable(false);
 			JButton westB3 = new JButton(">");
-			westB3.addActionListener(new shiftListener(_model,0,5));
+			westB3.addActionListener(new shiftListener(_model,0,5,10));
 			westB3.setFocusable(false);
 			
 			JButton northB1 = new JButton("V");
-			northB1.addActionListener(new shiftListener(_model,1,0));
+			northB1.addActionListener(new shiftListener(_model,1,0,1));
 			northB1.setFocusable(false);
 			JButton northB2 = new JButton("V");
-			northB2.addActionListener(new shiftListener(_model,3,0));
+			northB2.addActionListener(new shiftListener(_model,3,0,2));
 			northB2.setFocusable(false);
 			JButton northB3 = new JButton("V");
-			northB3.addActionListener(new shiftListener(_model,5,0));
+			northB3.addActionListener(new shiftListener(_model,5,0,3));
 			northB3.setFocusable(false);
 			
 			JButton eastB1 = new JButton("<");
-			eastB1.addActionListener(new shiftListener(_model,6,1));
+			eastB1.addActionListener(new shiftListener(_model,6,1,4));
 			eastB1.setFocusable(false);
 			JButton eastB2 = new JButton("<");
-			eastB2.addActionListener(new shiftListener(_model,6,3));
+			eastB2.addActionListener(new shiftListener(_model,6,3,5));
 			eastB2.setFocusable(false);
 			JButton eastB3 = new JButton("<");
-			eastB3.addActionListener(new shiftListener(_model,6,5));
+			eastB3.addActionListener(new shiftListener(_model,6,5,6));
 			eastB3.setFocusable(false);
 			
 			JButton southB1 = new JButton("Λ");
-			southB1.addActionListener(new shiftListener(_model,1,6));
+			southB1.addActionListener(new shiftListener(_model,1,6,7));
 			southB1.setFocusable(false);
 			JButton southB2 = new JButton("Λ");
-			southB2.addActionListener(new shiftListener(_model,3,6));
+			southB2.addActionListener(new shiftListener(_model,3,6,8));
 			southB2.setFocusable(false);
 			JButton southB3 = new JButton("Λ");
-			southB3.addActionListener(new shiftListener(_model,5,6));
+			southB3.addActionListener(new shiftListener(_model,5,6,9));
 			southB3.setFocusable(false);
 			
 			_westBPanel = new JPanel();
@@ -240,8 +247,10 @@ public class  GUI implements Runnable, Observer {
 			_offGamePanel.remove(_holdPanel);
 			_offGamePanel.remove(_player);
 			_offGamePanel.remove(Token);
+			_offGamePanel.remove(Save);
 			_player = new JButton(_model.pawns[_model.playerUp-1].getPlayer());
 			_player.setOpaque(true);
+			_player.setForeground(Color.white);
 			if(_model.playerUp==1)_player.setBackground(_model.pawns[0].color);
 			if(_model.playerUp==2)_player.setBackground(_model.pawns[1].color);
 			if(_model.playerUp==3)_player.setBackground(_model.pawns[2].color);
@@ -280,7 +289,12 @@ public class  GUI implements Runnable, Observer {
 			key = new keyMovement(_model,_model.pawns[_model.playerUp-1]);
 			Token = new JButton("Token Pickup");
 			Token.addActionListener(new TokenPickup(_model,_model.pawns[_model.playerUp-1]));
+			Token.setFocusable(false);
+			Save = new JButton("Save");
+			Save.addActionListener(new Save(_model));
+			Save.setFocusable(false);
 			_offGamePanel.add(Token);
+			_offGamePanel.add(Save);
 			_gameFrame.addKeyListener(key);
 			_gameFrame.pack();
 			_gameFrame.repaint();	

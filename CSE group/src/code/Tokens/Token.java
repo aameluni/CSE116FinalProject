@@ -26,6 +26,9 @@ public class Token {
 		this.tokenName(setCount);
 		setCount++;
 	}
+	public Token(int i){
+		tokenValue = i;
+	}
 	/**
 	 * @author bdlipp cwiechec
 	 * @param tokenNum sets the tokenName of the token that's instantiated. Also sets that token's tokenValue to be equal to the

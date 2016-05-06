@@ -33,7 +33,9 @@ public class FileConv {
 					System.out.println("File Already Exists");
 					f.delete();
 					System.out.println("Overwritten");
-					save();
+					f.createNewFile();
+					make();
+					System.out.println("Save Complete");
 					}
 			} catch (IOException e1) {
 				System.out.println("Failed to Save");
@@ -53,18 +55,20 @@ public class FileConv {
 			model.setPlayers(s.nextLine());
 			model.setTiles(s.nextLine());
 			int i= Integer.parseInt(s.nextLine());
+			System.out.println(i);
 			if(i!=0)
-				model.firstMove=false;
-			else
-				model.firstMove=true;
+			{
+				model.setButtons(i);
+			}
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found, failed to restore.");
 		}
 		
 	}
-	public void setFile(File f)
+	public void setFile(File fi)
 	{
-		this.f = f;
+		f = fi;
 	}
 }
 	

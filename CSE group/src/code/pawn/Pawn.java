@@ -90,7 +90,6 @@ public class Pawn {
 		catch (Exception e)
 		{
 		}
-		System.out.println(r);
 	}
 	
 	/**
@@ -283,9 +282,10 @@ public class Pawn {
 	 * in place and picks it up if that it is the next token in order.
 	 */	
 	public void pickUpToken(){
-		if(validMove){
+		//if(validMove){
 			if(board.getTile(positionX, positionY).hasToken){
 				System.out.println(board.getTile(positionX, positionY).getToken().getValue());
+				System.out.println("yes");
 				if(board.tokenCounter==board.getTile(positionX, positionY).getToken().getValue()){
 					tokenCounts.add(board.getTile(positionX, positionY).getToken().getValue());
 					System.out.println("Token picked up");
@@ -314,7 +314,7 @@ public class Pawn {
 				
 				}
 			}
-		}
+	//	}
 	}
 	
 	
@@ -343,6 +343,19 @@ public class Pawn {
 	{
 		return "" + tokenCounts;
 	}
+	public void setRecipe(Recipe r)
+	{
+		this.r = r;
+	}
 
-
+	public void setTokens(ArrayList<String> tokens) {
+		for(int i=0;i<tokens.size();i++)
+		{
+			tokenCounts.add(Integer.parseInt(tokens.get(i)));
+		}
+	}
+	public void setWCount(int w)
+	{
+		wcount = w;
+	}
 }

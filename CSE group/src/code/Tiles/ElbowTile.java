@@ -19,6 +19,10 @@ public class ElbowTile extends Tiles {
 	public ElbowTile(String orientation){
 		this.Rotate(orientation);
 	}
+	public ElbowTile(int i)
+	{
+		Rotation("L"+i);
+	}
 	/**
 	 * @author Wiechec
 	 * Constructor creates a tile, but returns a tile defaulted into the NORTH orientation.

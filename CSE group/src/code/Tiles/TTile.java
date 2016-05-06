@@ -24,7 +24,10 @@ public class TTile  extends Tiles{
 	public TTile(){
 		this.Rotate("North");
 	}
-	
+	public TTile(int i)
+	{
+		Rotation("T"+i);
+	}
 
 	/**
 	 * @author Wiechec
